@@ -8,7 +8,7 @@ public class Usuario {
     private String email;
     private String clave;
     private boolean activo;
-    
+
     public Usuario() {
     }
 

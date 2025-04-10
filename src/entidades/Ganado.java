@@ -1,7 +1,5 @@
 
-
 package entidades;
-
 
 public class Ganado {
     private int id;
@@ -16,7 +14,8 @@ public class Ganado {
     public Ganado() {
     }
 
-    public Ganado(int id, int ganaderoId, String numeroIdentificacion, String raza, int edad, double peso, boolean vacunado, String fechaRegistro) {
+    public Ganado(int id, int ganaderoId, String numeroIdentificacion, String raza, int edad, double peso,
+            boolean vacunado, String fechaRegistro) {
         this.id = id;
         this.ganaderoId = ganaderoId;
         this.numeroIdentificacion = numeroIdentificacion;
@@ -93,11 +92,9 @@ public class Ganado {
 
     @Override
     public String toString() {
-        return "Ganado" + "id:" + id + ", ganaderoId:" + ganaderoId + ", numeroIdentificacion:" + 
-                numeroIdentificacion + ", raza" + raza + ", edad" + edad + ", peso" + peso + 
-                ", vacunado" + vacunado + ", fechaRegistro" + fechaRegistro ;
+        return "Ganado" + "id:" + id + ", ganaderoId:" + ganaderoId + ", numeroIdentificacion:" +
+                numeroIdentificacion + ", raza" + raza + ", edad" + edad + ", peso" + peso +
+                ", vacunado" + vacunado + ", fechaRegistro" + fechaRegistro;
     }
-    
-    
-    
+
 }

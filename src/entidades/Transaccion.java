@@ -1,7 +1,6 @@
 
 package entidades;
 
-
 public class Transaccion {
     private int id;
     private int ganaderoId;
@@ -72,9 +71,9 @@ public class Transaccion {
 
     @Override
     public String toString() {
-        return "Transaccion" + "id:" + id + ", ganaderoId:" + ganaderoId + ", tipoTransaccion:" + tipoTransaccion + ", fecha:" + fecha 
+        return "Transaccion" + "id:" + id + ", ganaderoId:" + ganaderoId + ", tipoTransaccion:" + tipoTransaccion
+                + ", fecha:" + fecha
                 + ", total:" + total + ", estado:" + estado;
     }
-    
-    
+
 }
