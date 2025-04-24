@@ -127,4 +127,26 @@ public class rolDAO implements CrudSimpleInterface<Rol> {
         }
         return total;
     }
+
+    @Override
+    public boolean existe(String nombre) {
+        boolean existe = false;
+        try {
+            ps = CON.conectar().prepareStatement("SELECT COUNT(*) FROM rol WHERE nombre = ?");
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                existe = true;  // El rol con ese nombre ya existe
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            rs = null;
+            ps = null;
+            CON.desconectar();
+        }
+        return existe;
+    }
 }
