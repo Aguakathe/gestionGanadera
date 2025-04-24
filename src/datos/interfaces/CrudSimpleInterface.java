@@ -18,4 +18,6 @@ public interface CrudSimpleInterface <T> { //T SIGINIFICA UN OBJETO QUE SE LE VA
     //Método para contar el total de elementos registrados
     public int total();
     
+    
+    
 }
