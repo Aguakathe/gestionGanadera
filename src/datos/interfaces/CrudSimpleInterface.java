@@ -20,4 +20,6 @@ public interface CrudSimpleInterface <T> { //T SIGINIFICA UN OBJETO QUE SE LE VA
     // Método para verificar si el registro existe
     boolean existe(String texto);
     
+    
+    
 }
