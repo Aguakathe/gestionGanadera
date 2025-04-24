@@ -139,4 +139,31 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
         }
         return totalRegistro;
     }
+  
+    public boolean existe(String numeroIdentificacion, int id) {
+        respuesta = false; // Inicializamos la variable respuesta como falsa
+
+        try {
+            // Preparar la consulta para verificar si el número de identificación ya existe en otro ganado
+            ps = CON.conectar().prepareStatement("SELECT numero_identificacion FROM ganado WHERE numero_identificacion = ? AND id != ?");
+            ps.setString(1, numeroIdentificacion); // Seteamos el número de identificación
+            ps.setInt(2, id); // Seteamos el ID del registro actual para que se excluya en la búsqueda
+            rs = ps.executeQuery(); // Ejecutamos la consulta
+
+            // Si se encuentra un registro con el mismo número de identificación (pero con un ID diferente)
+            if (rs.next()) {
+                respuesta = true; // El número de identificación ya existe
+            }
+            ps.close(); // Cerramos la consulta
+            rs.close(); // Cerramos el conjunto de resultados
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()); // En caso de error, mostramos el mensaje
+        } finally {
+            ps = null; // Limpiamos el PreparedStatement
+            rs = null; // Limpiamos el ResultSet
+            CON.desconectar(); // Desconectamos la base de datos
+        }
+
+        return respuesta; // Retornamos si el número de identificación ya existe o no
+    }
 }
