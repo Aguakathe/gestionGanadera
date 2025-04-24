@@ -1,4 +1,3 @@
-
 package datos;
 
 import database.Conexion;
@@ -147,8 +146,8 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
         }
         return totalRegistro;
     }
-    
-     public boolean activar(int id) {
+
+    public boolean activar(int id) {
         boolean respuesta = false;
         try {
             ps = CON.conectar().prepareStatement("UPDATE Categoria SET activo=1 WHERE id=?");
@@ -179,6 +178,31 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             ps = null;
+            CON.desconectar();
+        }
+        return respuesta;
+    }
+
+    @Override
+    public boolean existe(String texto) {
+        respuesta = false;
+
+        try {
+            // Verificamos si ya existe un usuario con el mismo nombre
+            ps = CON.conectar().prepareStatement("SELECT nombre FROM usuario WHERE nombre = ?");
+            ps.setString(1, texto);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                respuesta = true;  // Si existe un usuario con ese nombre, devuelve true
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
             CON.desconectar();
         }
         return respuesta;
