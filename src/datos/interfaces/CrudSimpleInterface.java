@@ -17,9 +17,10 @@ public interface CrudSimpleInterface <T> { //T SIGINIFICA UN OBJETO QUE SE LE VA
     public boolean eliminar(int id);
     //Método para contar el total de elementos registrados
     public int total();
-    //Método para verificar si el registro existe
-    public boolean existe(String texto);
-    
-    
-    
+    // Este método será opcional, no todas las implementaciones deben hacerlo
+    public default boolean existe(String texto) {
+        // Retorna false por defecto, las implementaciones pueden sobrecargar este método si lo necesitan
+        return false;
+    }
+
 }
