@@ -69,42 +69,6 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         return respuesta;
     }
 
-    public boolean activar(int id) {
-        boolean respuesta = false;
-        try {
-            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
-            ps.setInt(1, id);
-            if (ps.executeUpdate() > 0) {
-                respuesta = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            con.desconectar();
-        }
-        return respuesta;
-    }
-
-    public boolean desactivar(int id) {
-        boolean respuesta = false;
-        try {
-            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
-            ps.setInt(1, id);
-            if (ps.executeUpdate() > 0) {
-                respuesta = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            con.desconectar();
-        }
-        return respuesta;
-    }
-
     @Override
     public boolean actualizar(Ganadero obj) {
         respuesta = false;
@@ -160,6 +124,42 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
             }
             ps.close();
             rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+
+    public boolean desactivar(int id) {
+        boolean respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+
+    public boolean activar(int id) {
+        boolean respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {

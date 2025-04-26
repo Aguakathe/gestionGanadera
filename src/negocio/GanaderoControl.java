@@ -8,12 +8,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class GanaderoControl {
 
-    private final GanaderoDAO DATOS; //OBJETOS QUYE MANEJA LAS OPERACIONES CON LAS BASES DE DATOS
-    private Ganadero obj;//OBJETO DE TIPO CATEGORIA QUE SE UTILIZA PARA MANIPULAR DATOS TEMPORALES
-    private DefaultTableModel modeloTabla;//MODELO DE TABLA UTILIZADO PARA MOSTRAR DATOS EN LA INTERFAZ GRAFICA
-    public int RegistrosMostrados;//varibable que almacena el numero de registros que se muestran en la tabla
+    private final GanaderoDAO DATOS; // OBJETOS QUYE MANEJA LAS OPERACIONES CON LAS BASES DE DATOS
+    private Ganadero obj;// OBJETO DE TIPO CATEGORIA QUE SE UTILIZA PARA MANIPULAR DATOS TEMPORALES
+    private DefaultTableModel modeloTabla;// MODELO DE TABLA UTILIZADO PARA MOSTRAR DATOS EN LA INTERFAZ GRAFICA
+    public int RegistrosMostrados;// varibable que almacena el numero de registros que se muestran en la tabla
 
-    //constructor de la ganadero control
+    // constructor de la ganadero control
     public GanaderoControl() {
         this.DATOS = new GanaderoDAO();
         this.obj = new Ganadero();
@@ -22,18 +22,19 @@ public class GanaderoControl {
 
     public DefaultTableModel listar(String texto) {
         List<Ganadero> lista = new ArrayList<>();
-        lista.addAll(DATOS.listar(texto));//LLENA LA LISTA CON LOS RESULTADOS DE LA LISTAS
+        lista.addAll(DATOS.listar(texto));// LLENA LA LISTA CON LOS RESULTADOS DE LA LISTAS
 
-        String[] titulos = {"Id", "Nombre", "Tipo de documento", "Numero de documneto","Telefono","Direccion","Email","Estado"};//Encabezados de las columnas
-        this.modeloTabla = new DefaultTableModel(null, titulos);//Se inicializa el modelo de la tabla coon los encabezados
+        String[] titulos = { "Id", "Nombre", "Descripcion", "Estado" };// Encabezados de las columnas
+        this.modeloTabla = new DefaultTableModel(null, titulos);// Se inicializa el modelo de la tabla coon los
+                                                                // encabezados
 
-        String estado;//Variable temporal para almacenar el estado de ccada categoria
-        String[] registro = new String[9];//Arreglo  de String para almacenar los datos de cada fila;
-        this.RegistrosMostrados = 0;//Se reinicia el contador de registros
+        String estado;// Variable temporal para almacenar el estado de ccada categoria
+        String[] registro = new String[4];// Arreglo de String para almacenar los datos de cada fila;
+        this.RegistrosMostrados = 0;// Se reinicia el contador de registros
 
-        //for que recorre cada categoria obtenida de la base de datos 
+        // for que recorre cada categoria obtenida de la base de datos
         for (Ganadero item : lista) {
-            if (item.isActivo()) {//VERIFICA SI LA CATEGORIA ESTA ACTIVA O INACTIVA
+            if (item.isActivo()) {// VERIFICA SI LA CATEGORIA ESTA ACTIVA O INACTIVA
                 estado = "Activo";
 
             } else {
@@ -56,8 +57,9 @@ public class GanaderoControl {
 
     }
 
-    //Metodo insertarn una ueva categoria
-    public String Insertar(String nombre, String direccion, String tipodocumento, int NumeroDocumento, int telefono, String email) {
+    // Metodo insertarn una ueva categoria
+    public String Insertar(String nombre, String direccion, String tipodocumento, int NumeroDocumento, int telefono,
+            String email) {
         if (DATOS.Existe(nombre)) {
             return "El registro ya existe ";
         } else {
@@ -76,7 +78,8 @@ public class GanaderoControl {
         }
     }
 
-    public String Actualizar(int id, String nombre, String direccion, String nombreAnt, String tipodocumento, int numrtodocumento, int telefono, String email) {
+    public String Actualizar(int id, String nombre, String direccion, String nombreAnt, String tipodocumento,
+            int numrtodocumento, int telefono, String email) {
         if (nombre.equals(nombreAnt)) {
             obj.setId(id);
             obj.setNombre(nombre);
@@ -91,7 +94,8 @@ public class GanaderoControl {
             } else {
                 return "Error en la  actualizacion";
             }
-        } else {//Si se cambuio el nombre se verifica que no exista otro registro con ese nombre
+        } else {// Si se cambuio el nombre se verifica que no exista otro registro con ese
+                // nombre
             if (DATOS.Existe(nombre)) {
                 return "El registro ya exite";
 
@@ -112,7 +116,7 @@ public class GanaderoControl {
         }
     }
 
-    //Metodo desactivar
+    // Metodo desactivar
     public String Desactivar(int id) {
         if (DATOS.desactivar(id)) {
             return "Ok";
@@ -121,7 +125,7 @@ public class GanaderoControl {
         }
     }
 
-    //METODO PARA ACTIVAR UNA CATEGORIA  
+    // METODO PARA ACTIVAR UNA CATEGORIA
     public String Activar(int id) {
         if (DATOS.activar(id)) {
             return "Ok";
@@ -131,12 +135,12 @@ public class GanaderoControl {
         }
     }
 
-    //metodo para obtener el total de categoria registarads en la base de datos 
+    // metodo para obtener el total de categoria registarads en la base de datos
     public int total() {
         return DATOS.total();
     }
 
-    //metodo para obtener el  numero de categoria actuales
+    // metodo para obtener el numero de categoria actuales
     public int totalMostrados() {
         return this.RegistrosMostrados;
     }
