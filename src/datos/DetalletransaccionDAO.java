@@ -121,7 +121,33 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             con.desconectar();
         }
         return respuesta;
+    }public boolean Existe(int idTransaccion, int idGanado) {
+    respuesta = false;
+    try {
+        ps = con.conectar().prepareStatement(
+            "SELECT id FROM DetalleTransaccion WHERE idTransaccion = ? AND idGanado = ?"
+        );
+        ps.setInt(1, idTransaccion);
+        ps.setInt(2, idGanado);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            respuesta = true;
+        }
+
+        ps.close();
+        rs.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+    } finally {
+        ps = null;
+        rs = null;
+        con.desconectar();
     }
+    return respuesta;
+}
+
+   
 
     @Override
     public int total() {

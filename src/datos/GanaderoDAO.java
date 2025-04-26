@@ -31,7 +31,8 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                registro.add(new Ganadero(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getBoolean(8)));
+                registro.add(new Ganadero(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+                        rs.getString(6), rs.getString(7), rs.getBoolean(8)));
             }
 
             ps.close();
@@ -58,6 +59,42 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
                 respuesta = true;
             }
 
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+
+    public boolean activar(int id) {
+        boolean respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+
+    public boolean desactivar(int id) {
+        boolean respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps.setInt(1, id);
+            if (ps.executeUpdate() > 0) {
+                respuesta = true;
+            }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -112,6 +149,26 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         return respuesta;
     }
 
+    public boolean Existe(String texto) {
+        respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement("SELECT nombre FROM categoria WHERE nombre=?");
+            ps.setString(1, texto);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                respuesta = true;
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+
     @Override
     public int total() {
         int total = 0;
@@ -132,6 +189,5 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         }
         return total;
     }
-    
 
 }

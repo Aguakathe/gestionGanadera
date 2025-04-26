@@ -21,6 +21,7 @@ public class Ganadero {
         this.Email = Email;
         this.Activo = Activo;
     }
+    public Ganadero(){}   
 
     public int getId() {
         return id;

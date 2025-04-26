@@ -14,6 +14,10 @@ public class DetalleTransaccion {
         this.precio_Unitario = precio_Unitario;
         this.cantidad = cantidad;
     }
+    public DetalleTransaccion(){
+        
+    }
+    
 
     public int getId() {
         return id;
