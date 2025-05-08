@@ -11,7 +11,8 @@ public class Ganadero {
     private String Email;
     private boolean Activo;
 
-    public Ganadero(int id, String Nombre, String Tipo_Documento, int Num_Documento, int Telefono, String Direccion, String Email, boolean Activo) {
+    public Ganadero(int id, String Nombre, String Tipo_Documento, int Num_Documento, int Telefono, String Direccion,
+            String Email, boolean Activo) {
         this.id = id;
         this.Nombre = Nombre;
         this.Tipo_Documento = Tipo_Documento;
@@ -20,6 +21,9 @@ public class Ganadero {
         this.Direccion = Direccion;
         this.Email = Email;
         this.Activo = Activo;
+    }
+
+    public Ganadero() {
     }
 
     public int getId() {
@@ -88,7 +92,9 @@ public class Ganadero {
 
     @Override
     public String toString() {
-        return "Ganadero{" + "id=" + id + ", Nombre=" + Nombre + ", Tipo_Documento=" + Tipo_Documento + ", Num_Documento=" + Num_Documento + ", Telefono=" + Telefono + ", Direccion=" + Direccion + ", Email=" + Email + ", Activo=" + Activo + '}';
+        return "Ganadero{" + "id=" + id + ", Nombre=" + Nombre + ", Tipo_Documento=" + Tipo_Documento
+                + ", Num_Documento=" + Num_Documento + ", Telefono=" + Telefono + ", Direccion=" + Direccion
+                + ", Email=" + Email + ", Activo=" + Activo + '}';
     }
-    
+
 }
