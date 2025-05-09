@@ -136,6 +136,8 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             CON.desconectar();
+            ps = null;
+            rs = null;
         }
         return totalRegistro;
     }
