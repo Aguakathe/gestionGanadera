@@ -31,7 +31,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private void listar(String texto) {
         tablaListarTransacciones.setModel(this.CONTROL.listar(texto));
         //Mostrando el total Mostardo (Método creado en CategoriaCotrol) y mostrando el total acumulativo de la base de datos
-        //ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
+        ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
     }
 
     private void limpiar() {
@@ -68,6 +68,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListarTransacciones = new javax.swing.JTable();
+        ibTotalRegistros = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -114,6 +115,8 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaListarTransacciones);
 
+        ibTotalRegistros.setText("Registros");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,6 +134,10 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnNuevo)))
                 .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ibTotalRegistros)
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +150,10 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                         .addComponent(btnNuevo))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ibTotalRegistros)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Listar Transaccion", jPanel1);
@@ -319,6 +329,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JLabel ibTotalRegistros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
