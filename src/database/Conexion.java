@@ -11,7 +11,7 @@ public class Conexion {
     //URL de conexión al servidor MySQL en el puerto 3306 (puerto por defecto)
     private final String URL = "jdbc:mysql://localhost:3306/";
     //Nombre de la base de datos a la que nos conectaremos
-    private final String DB = "dbsistemas";
+    private final String DB = "gestion_ganadera";
     //Usuario para conectarse a la base de datos (por defecto es: "root")
     private final String USER = "root";
     //Contraseña para el usuario; en este caso la dejaremos vacía
