@@ -95,6 +95,10 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Transaccion");
 
+        tabGeneral.setBackground(new java.awt.Color(102, 102, 255));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+
         jLabel1.setText("Id Transaccion ");
 
         btnBuscar.setText("Buscar");
@@ -170,6 +174,8 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         );
 
         tabGeneral.addTab("Listar Transaccion", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setText("Ganadero Id (*)");
 
