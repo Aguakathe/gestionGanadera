@@ -15,6 +15,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
 
     private final GanadoControl CONTROL;
     private String accion;
+    private String ganadero_id_ant;
 
     public FrmGanado() {
         initComponents();
@@ -22,6 +23,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
         this.listar("");
         tabGeneral.setEnabledAt(1, false);
         this.accion = "";
+        txtid.setVisible(false);
     }
 
     private void listar(String texto) {
@@ -67,6 +69,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
         tablaListarGanado = new javax.swing.JTable();
         ibTotalRegistros = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -85,6 +88,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         txtNumIdentificacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        txtid = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 255, 204));
         setClosable(true);
@@ -119,6 +123,13 @@ public class FrmGanado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,10 +144,12 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                         .addComponent(txtNumId, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
-                        .addGap(42, 42, 42)
-                        .addComponent(btnNuevo))
-                    .addComponent(ibTotalRegistros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)
+                        .addComponent(btnNuevo)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnEditar))
+                    .addComponent(ibTotalRegistros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +159,8 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtNumId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
-                    .addComponent(btnNuevo))
+                    .addComponent(btnNuevo)
+                    .addComponent(btnEditar))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -196,30 +210,33 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(45, 45, 45)
-                            .addComponent(btnCancelar))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel2))
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNumIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtVacunado, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtFechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(418, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(btnCancelar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel2))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNumIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtVacunado, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(41, 41, 41)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +244,8 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -294,22 +312,22 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtGanaderoid.getText().length() == 0) {
+        if (txtGanaderoid.getText().length() == 0 || txtid.getText().length() > 20) {
             JOptionPane.showMessageDialog(this, "Debes ingresar un id de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
             txtGanaderoid.requestFocus();
             return;
         }
         try {
             // Conversión de datos
-            int ganaderoId = Integer.parseInt(txtGanaderoid.getText());  // Conversión a int
-            String numeroIdentificacion = txtNumIdentificacion.getText();  // Se mantiene como String
-            String raza = txtRaza.getText();  // Se mantiene como String
-            int edad = Integer.parseInt(txtEdad.getText());  // Conversión a int
-            double peso = Double.parseDouble(txtPeso.getText());  // Conversión a double
-            boolean vacunado = Boolean.parseBoolean(txtVacunado.getText());  // Conversión a boolean
-            String fechaRegistro = txtFechaRegistro.getText();  // Se mantiene como String
+            int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
+            String numeroIdentificacion = txtNumIdentificacion.getText();
+            String raza = txtRaza.getText();
+            int edad = Integer.parseInt(txtEdad.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            boolean vacunado = Boolean.parseBoolean(txtVacunado.getText());
+            String fechaRegistro = txtFechaRegistro.getText();
 
-            // Validar que el valor de vacunado esté en un formato correcto
+            // Validar campo vacunado
             if (!txtVacunado.getText().equals("true") && !txtVacunado.getText().equals("false")) {
                 JOptionPane.showMessageDialog(this, "El campo de vacunado debe ser true o false", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -317,12 +335,34 @@ public class FrmGanado extends javax.swing.JInternalFrame {
 
             String resp;
             if (this.accion.equals("Editar")) {
-                // Aquí iría el código para editar
-            } else {
-                // Insertando un nuevo registro
-                resp = this.CONTROL.insertar(ganaderoId, numeroIdentificacion, raza, edad, peso, vacunado, fechaRegistro);
+                // Actualizar
+                resp = this.CONTROL.actualizar(
+                        Integer.parseInt(txtid.getText()),
+                        ganaderoId,
+                        numeroIdentificacion,
+                        raza,
+                        edad,
+                        peso,
+                        vacunado,
+                        this.ganadero_id_ant
+                );
+
                 if (resp.equals("OK")) {
-                    this.mensajeOK("Registrado Correctamente");
+                    this.mensajeOK("Actualizado correctamente");
+                    this.limpiar();
+                    this.listar("");
+                    tabGeneral.setSelectedIndex(0);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setEnabledAt(1, false);
+                } else {
+                    this.mensajeError(resp);
+                }
+            } else {
+                // Insertar nuevo, mirar esto?
+                resp = this.CONTROL.insertar(ganaderoId, numeroIdentificacion, raza, edad, peso, vacunado, fechaRegistro);
+
+                if (resp.equals("OK")) {
+                    this.mensajeOK("Registrado correctamente");
                     this.limpiar();
                     this.listar("");
                     tabGeneral.setSelectedIndex(0);
@@ -332,15 +372,52 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                     this.mensajeError(resp);
                 }
             }
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor ingresa valores numéricos válidos en los campos Edad y Peso.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        if (tablaListarGanado.getSelectedRowCount() == 1) {
+            String id = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 0));
+            String ganaderoId = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 1));
+            this.ganadero_id_ant = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 1));
+            String numeroIdentificacion = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 2));
+            String raza = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 3));
+            String edad = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 4));
+            String peso = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 5));
+            String vacunado = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 6));
+            String fechaRegistro = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 7));
+
+            txtid.setText(id); //tenemos un numId y un txtid? por qué?
+            txtGanaderoid.setText(ganaderoId);
+            txtNumIdentificacion.setText(numeroIdentificacion);
+            txtRaza.setText(raza);
+            txtEdad.setText(edad);
+            txtPeso.setText(peso);
+            txtVacunado.setText(vacunado);
+
+            txtFechaRegistro.setText(fechaRegistro);
+
+            tabGeneral.setEnabledAt(0, false);
+            tabGeneral.setEnabledAt(1, true);
+            tabGeneral.setSelectedIndex(1);
+            this.accion = "editar";
+
+            btnGuardar.setText("editar");
+
+        } else {
+            this.mensajeError("Seleccione un registro a editar");
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel ibTotalRegistros;
@@ -366,5 +443,6 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtRaza;
     private javax.swing.JTextField txtVacunado;
+    private javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables
 }

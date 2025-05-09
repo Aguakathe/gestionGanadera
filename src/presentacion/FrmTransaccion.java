@@ -12,10 +12,13 @@ import negocio.TransaccionControl;
  *
  * @author USER
  */
+
 public class FrmTransaccion extends javax.swing.JInternalFrame {
 
     private final TransaccionControl CONTROL;
     private String accion;
+    private String ganadero_id_ant;
+
 
     /**
      * Creates new form FrmTransaccion
@@ -26,12 +29,13 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         this.listar("");
         tabGeneral.setEnabledAt(1, false);
         this.accion = "";
+        txtid.setVisible(false);
     }
 
     private void listar(String texto) {
         tablaListarTransacciones.setModel(this.CONTROL.listar(texto));
         //Mostrando el total Mostardo (Método creado en CategoriaCotrol) y mostrando el total acumulativo de la base de datos
-        //ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
+        ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
     }
 
     private void limpiar() {
@@ -68,6 +72,8 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListarTransacciones = new javax.swing.JTable();
+        ibTotalRegistros = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -82,6 +88,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         txtFecha = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         txtEstado = new javax.swing.JTextField();
+        txtid = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 255, 255));
         setClosable(true);
@@ -114,14 +121,23 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaListarTransacciones);
 
+        ibTotalRegistros.setText("Registros");
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(ibTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(44, 44, 44)
@@ -129,8 +145,11 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                         .addGap(31, 31, 31)
                         .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNuevo)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(btnNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,11 +159,14 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtIdTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscar)
-                        .addComponent(btnNuevo))
+                        .addComponent(btnNuevo)
+                        .addComponent(btnEditar))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ibTotalRegistros)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Listar Transaccion", jPanel1);
@@ -196,12 +218,14 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                             .addComponent(txtTipoTransaccion)
                             .addComponent(txtFecha)
                             .addComponent(txtTotal)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar)))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +233,8 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGanaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -232,7 +257,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Editar Transaccion", jPanel2);
@@ -241,11 +266,11 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+            .addComponent(tabGeneral)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+            .addComponent(tabGeneral)
         );
 
         pack();
@@ -271,55 +296,100 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtGanaderoid.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar un ID de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
-            txtGanaderoid.requestFocus();
+        JOptionPane.showMessageDialog(this, "Debes ingresar un ID de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
+        txtGanaderoid.requestFocus();
+        return;
+    }
+
+    try {
+        // Conversión de datos
+        int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
+        String tipoTransaccion = txtTipoTransaccion.getText().trim();
+        String fecha = txtFecha.getText().trim();
+        double total = Double.parseDouble(txtTotal.getText());
+        String estado = txtEstado.getText().trim().toLowerCase();
+
+        // Validación del estado
+        if (!estado.equals("pendiente") && !estado.equals("completado") && !estado.equals("cancelado")) {
+            JOptionPane.showMessageDialog(this, "Estado inválido. Usa: pendiente, completado o cancelado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        try {
-            // Conversión de datos
-            int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
-            String tipoTransaccion = txtTipoTransaccion.getText();
-            String fecha = txtFecha.getText();
-            double total = Double.parseDouble(txtTotal.getText());
-            String estado = txtEstado.getText();
+        String resp;
+        if (this.accion.equals("Editar")) {
+            // Actualizar transacción existente
+            int id = Integer.parseInt(txtid.getText()); // Asegúrate de tener un txtId para la edición
+            resp = this.CONTROL.actualizar(id, ganaderoId, tipoTransaccion, fecha, total, estado);
 
-            // Validación básica del estado (opcional)
-            if (!estado.equalsIgnoreCase("pendiente")
-                    && !estado.equalsIgnoreCase("completado")
-                    && !estado.equalsIgnoreCase("cancelado")) {
-                JOptionPane.showMessageDialog(this, "Estado inválido. Usa: pendiente, completado o cancelado", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            String resp;
-            if (this.accion.equals("Editar")) {
-                // Aquí iría el código para editar
+            if (resp.equals("OK")) {
+                this.mensajeOK("Transacción actualizada correctamente");
+                this.limpiar();
+                this.listar("");
+                tabGeneral.setSelectedIndex(0);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setEnabledAt(1, false);
             } else {
-                // Insertar nueva transacción
-                resp = this.CONTROL.insertar(ganaderoId, tipoTransaccion, fecha, total, estado);
-                if (resp.equals("OK")) {
-                    this.mensajeOK("Transacción registrada correctamente");
-                    this.limpiar();
-                    this.listar("");
-                    tabGeneral.setSelectedIndex(0);
-                    tabGeneral.setEnabledAt(0, true);
-                    tabGeneral.setEnabledAt(1, false);
-                } else {
-                    this.mensajeError(resp);
-                }
+                this.mensajeError(resp);
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa un número válido en el campo Total.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Insertar nueva transacción
+            resp = this.CONTROL.insertar(ganaderoId, tipoTransaccion, fecha, total, estado);
+
+            if (resp.equals("OK")) {
+                this.mensajeOK("Transacción registrada correctamente");
+                this.limpiar();
+                this.listar("");
+                tabGeneral.setSelectedIndex(0);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setEnabledAt(1, false);
+            } else {
+                this.mensajeError(resp);
+            }
         }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingresa un número válido en el campo Total o ID.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if (tablaListarTransacciones.getSelectedRowCount() == 1) {
+            String id = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 0));
+            String ganaderoId = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 1));
+            this.ganadero_id_ant = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(),1));
+            String tipoTransaccion = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 2));
+            String fecha = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 3));
+            String total = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 4));
+            String estado = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 5));
+            
+            txtid.setText(id); //me confunde, mirar despues 
+            txtGanaderoid.setText(ganaderoId);
+            txtTipoTransaccion.setText(tipoTransaccion);
+            txtFecha.setText(fecha);
+            txtTotal.setText(total);
+            txtEstado.setText(estado);
+            
+            tabGeneral.setEnabledAt(0, false);
+            tabGeneral.setEnabledAt(1, true);
+            tabGeneral.setSelectedIndex(1);
+            this.accion = "editar";
+
+            btnGuardar.setText("editar");
+}
+        else{
+            this.mensajeError("Seleccione un registro a editar");
+        }
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JLabel ibTotalRegistros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -338,5 +408,6 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtIdTransaccion;
     private javax.swing.JTextField txtTipoTransaccion;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables
 }
