@@ -31,7 +31,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private void listar(String texto) {
         tablaListarTransacciones.setModel(this.CONTROL.listar(texto));
         //Mostrando el total Mostardo (Método creado en CategoriaCotrol) y mostrando el total acumulativo de la base de datos
-        //ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
+        ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
     }
 
     private void limpiar() {
@@ -68,6 +68,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListarTransacciones = new javax.swing.JTable();
+        ibTotalRegistros = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -113,6 +114,8 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaListarTransacciones);
+
+        ibTotalRegistros.setText("Registros");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -320,6 +323,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JLabel ibTotalRegistros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
