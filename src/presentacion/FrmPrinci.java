@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/MDIApplication.java to edit this template
  */
-
-
 package presentacion;
+
 import java.awt.Color;
 import java.awt.Graphics;
+
 /**
  *
  * @author USER
@@ -89,10 +89,15 @@ public class FrmPrinci extends javax.swing.JFrame {
         menuTransacciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/iconos/transactional-data.png"))); // NOI18N
         menuTransacciones.setMnemonic('h');
         menuTransacciones.setText("Transacciones");
+        menuTransacciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTransaccionesActionPerformed(evt);
+            }
+        });
 
         contentMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_DOWN_MASK));
         contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Registrar Venta");
+        contentMenuItem.setText("Registrar Compra y Venta");
         contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contentMenuItemActionPerformed(evt);
@@ -131,13 +136,13 @@ public class FrmPrinci extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 1066, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -145,7 +150,9 @@ public class FrmPrinci extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-        // TODO add your handling code here:
+        FrmTransaccion frm = new FrmTransaccion();
+        Escritorio.add(frm);
+        frm.setVisible(true);
     }//GEN-LAST:event_contentMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
@@ -153,6 +160,10 @@ public class FrmPrinci extends javax.swing.JFrame {
         Escritorio.add(frm);
         frm.setVisible(true);
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void menuTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTransaccionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuTransaccionesActionPerformed
 
     /**
      * @param args the command line arguments
