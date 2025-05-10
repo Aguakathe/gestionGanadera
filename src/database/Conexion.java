@@ -15,7 +15,7 @@ public class Conexion {
     //Usuario para conectarse a la base de datos (por defecto es: "root")
     private final String USER = "root";
     //Contraseña para el usuario; en este caso la dejaremos vacía
-    private final String PASSWORD = "";
+    private final String PASSWORD = "12345";
     
     //Crear un objeto que almacene la conexión establecidad a la base de datos
     public Connection cadena;
