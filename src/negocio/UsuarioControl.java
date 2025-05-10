@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-
 public class UsuarioControl {
-     
+
     private final UsuarioDAO DATOS;
     private Usuario obj;
     private DefaultTableModel modeloTabla;
@@ -117,5 +116,15 @@ public class UsuarioControl {
     public int totalMostrados() {
         return this.registrosMostrados;
     }
+
+    public boolean validarCredenciales(String email, String clave) {
+        // Llamar al método buscarPorEmail para obtener el usuario
+        Usuario usuario = DATOS.buscarPorEmail(email);  // Llama al método buscarPorEmail
+        if (usuario != null && usuario.getClave().equals(clave)) {
+            return true;  // Si el usuario existe y la contraseña coincide
+        } else {
+            return false;  // Si no existe el usuario o la contraseña no coincide
+        }
+    }
+
 }
-    

@@ -96,13 +96,18 @@ public class FrmGanado extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Ganado");
 
-        tabGeneral.setBackground(new java.awt.Color(51, 153, 0));
+        tabGeneral.setBackground(new java.awt.Color(153, 255, 204));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setText("Num Identificacion");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tablaListarGanado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -412,6 +417,10 @@ public class FrmGanado extends javax.swing.JInternalFrame {
             this.mensajeError("Seleccione un registro a editar");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

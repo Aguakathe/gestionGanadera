@@ -184,17 +184,17 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
     }
 
     @Override
-    public boolean existe(String texto) {
+    public boolean existe(String email) {
         respuesta = false;
 
         try {
-            // Verificamos si ya existe un usuario con el mismo nombre
-            ps = CON.conectar().prepareStatement("SELECT nombre FROM usuario WHERE nombre = ?");
-            ps.setString(1, texto);
+            // Verificamos si ya existe un usuario con el mismo email
+            ps = CON.conectar().prepareStatement("SELECT email FROM usuario WHERE email = ?");
+            ps.setString(1, email);
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                respuesta = true;  // Si existe un usuario con ese nombre, devuelve true
+                respuesta = true;  // Si existe un usuario con ese email, devuelve true
             }
             ps.close();
             rs.close();
@@ -206,6 +206,36 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
             CON.desconectar();
         }
         return respuesta;
+    }
+
+    // Método para buscar un usuario por su email
+    // Método para buscar un usuario por su email
+    public Usuario buscarPorEmail(String email) {
+        Usuario usuario = null;
+        try {
+            String query = "SELECT * FROM usuario WHERE email = ?";
+            ps = CON.conectar().prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setRol_id(rs.getInt("rol_id"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setClave(rs.getString("clave"));
+                usuario.setActivo(rs.getBoolean("activo"));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();  // Deberías registrar o mostrar el error de forma detallada
+        } finally {
+            CON.desconectar();
+        }
+
+        return usuario;
     }
 
 }

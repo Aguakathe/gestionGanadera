@@ -44,6 +44,7 @@ public class FrmPrinci extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         menuUsuarios = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menuTransacciones = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -81,8 +82,22 @@ public class FrmPrinci extends javax.swing.JFrame {
 
         cutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Roles");
+        cutMenuItem.setText("Gestion Roles");
+        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItemActionPerformed(evt);
+            }
+        });
         menuUsuarios.add(cutMenuItem);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem3.setText("Gestion Uusarios");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menuUsuarios.add(jMenuItem3);
 
         menuBar.add(menuUsuarios);
 
@@ -127,6 +142,11 @@ public class FrmPrinci extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/iconos/log-out.png"))); // NOI18N
         jMenu2.setText("Salir");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         menuBar.add(jMenu2);
 
         setJMenuBar(menuBar);
@@ -160,6 +180,22 @@ public class FrmPrinci extends javax.swing.JFrame {
     private void menuTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTransaccionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuTransaccionesActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+        FrmRoles frm = new FrmRoles();
+        Escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmUsuarios frm = new FrmUsuarios();
+        Escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +240,7 @@ public class FrmPrinci extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuGanaderia;
