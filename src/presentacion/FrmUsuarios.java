@@ -221,6 +221,12 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Clave");
 
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -418,20 +424,26 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
         if (tablaListado.getSelectedRowCount() == 1) {
             String id = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 0));
-            String nombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 1));
-            //VENTANA DE CONFIRMACION
-            if (JOptionPane.showConfirmDialog(this, "deseas activar el registro" + nombre + "?", "desactivar", JOptionPane.YES_NO_OPTION) == 0) {
+            String nombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 2));
+
+            int confirmacion = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Deseas activar el registro \"" + nombre + "\"?",
+                    "Activar registro",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
                 String resp = this.CONTROL.activar(Integer.parseInt(id));
                 if (resp.equals("OK")) {
-                    this.mensajeOK("Registro activado");
+                    this.mensajeOK("Registro activado correctamente");
                     this.listar("");
                 } else {
-                    this.mensajeError("Error");
+                    this.mensajeError("No se pudo activar el registro: " + resp);
                 }
             }
-
         } else {
-            this.mensajeError("Seleccione un registro");
+            this.mensajeError("Debes seleccionar un solo registro para activar");
         }
     }//GEN-LAST:event_btnActivarActionPerformed
 
@@ -461,6 +473,10 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
         tabGeneral.setSelectedIndex(0);
         this.limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

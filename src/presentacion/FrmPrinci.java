@@ -91,7 +91,7 @@ public class FrmPrinci extends javax.swing.JFrame {
         menuUsuarios.add(cutMenuItem);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem3.setText("Gestion Uusarios");
+        jMenuItem3.setText("Gestion Usuarios");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
