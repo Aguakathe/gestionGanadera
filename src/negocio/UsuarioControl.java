@@ -25,11 +25,11 @@ public class UsuarioControl {
     public DefaultTableModel listar(String texto) {
         List<Usuario> lista = new ArrayList<>();
         lista.addAll(DATOS.listar(texto));
-        String[] titulos = {"ID", "Rol ID", "Nombre", "Email", "Estado"};
+        String[] titulos = {"ID", "Rol ID", "Nombre", "Email", "Clave", "Estado"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
         String estado;
-        String[] registro = new String[5];
+        String[] registro = new String[6];
         this.registrosMostrados = 0;
 
         for (Usuario item : lista) {
@@ -39,7 +39,8 @@ public class UsuarioControl {
             registro[1] = Integer.toString(item.getRol_id());
             registro[2] = item.getNombre();
             registro[3] = item.getEmail();
-            registro[4] = estado;
+            registro[4] = item.getClave();
+            registro[5] = estado;
 
             this.modeloTabla.addRow(registro);
             this.registrosMostrados++;

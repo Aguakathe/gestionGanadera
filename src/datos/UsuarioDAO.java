@@ -81,13 +81,12 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
     public boolean actualizar(Usuario obj) {
         respuesta = false;
         try {
-            ps = CON.conectar().prepareStatement("UPDATE usuario SET rol_id = ?, nombre = ?, email = ?, clave = ?, activo = ? WHERE id = ?");
+            ps = CON.conectar().prepareStatement("UPDATE usuario SET rol_id = ?, nombre = ?, email = ?, clave = ? WHERE id = ?");
             ps.setInt(1, obj.getRol_id());
             ps.setString(2, obj.getNombre());
             ps.setString(3, obj.getEmail());
             ps.setString(4, obj.getClave());
-            ps.setBoolean(5, obj.isActivo());
-            ps.setInt(6, obj.getId());
+            ps.setInt(5, obj.getId());
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -150,7 +149,7 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
     public boolean activar(int id) {
         boolean respuesta = false;
         try {
-            ps = CON.conectar().prepareStatement("UPDATE Categoria SET activo=1 WHERE id=?");
+            ps = CON.conectar().prepareStatement("UPDATE usuario SET activo=1 WHERE id=?");
             ps.setInt(1, id);
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -168,7 +167,7 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
     public boolean desactivar(int id) {
         boolean respuesta = false;
         try {
-            ps = CON.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps = CON.conectar().prepareStatement("UPDATE usuario SET activo=0 WHERE id=?");
             ps.setInt(1, id);
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -208,7 +207,7 @@ public class UsuarioDAO implements CrudSimpleInterface<Usuario> {
         return respuesta;
     }
 
-    // Método para buscar un usuario por su email
+    
     // Método para buscar un usuario por su email
     public Usuario buscarPorEmail(String email) {
         Usuario usuario = null;
