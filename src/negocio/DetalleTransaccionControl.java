@@ -35,7 +35,7 @@ public class DetalleTransaccionControl {
             registro[2] = Integer.toString(item.getId_ganado());
             registro[3] = Double.toString(item.getPrecio_Unitario());
             registro[4] = Integer.toString(item.getCantidad());
-
+            registro[5] = item.getEstado();
             this.modeloTabla.addRow(registro);
             this.RegistrosMostrados++;
         }
@@ -44,7 +44,7 @@ public class DetalleTransaccionControl {
         return this.modeloTabla;
     }
     
-    public String Insertar(int idTransaccion, int idGanado, double precioUnitario, int cantidad) {
+    public String Insertar(int idTransaccion, int idGanado, double precioUnitario, int cantidad,String estado) {
     if (DATOS.Existe(idTransaccion, idGanado)) {
         return "El registro ya existe.";
     } else {
@@ -52,6 +52,7 @@ public class DetalleTransaccionControl {
         obj.setId_ganado(idGanado);
         obj.setCantidad(cantidad);
         obj.setPrecio_Unitario(precioUnitario);
+        obj.setEstado(estado);
 
         if (DATOS.insertar(obj)) {
             return "Ok";

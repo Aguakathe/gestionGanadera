@@ -20,9 +20,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     private String ganadero_id_ant;
 
 
-    /**
-     * Creates new form FrmTransaccion
-     */
+    
     public FrmTransaccion() {
         initComponents();
         this.CONTROL = new TransaccionControl();
