@@ -79,6 +79,11 @@ public class FrmRoles extends javax.swing.JInternalFrame {
         jLabel2.setText("Nombre");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -320,6 +325,18 @@ public class FrmRoles extends javax.swing.JInternalFrame {
         tabGeneral.setSelectedIndex(0);
         this.limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+         String texto = txtBuscar.getText().trim();
+
+        if (texto.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para buscar", "Sistema", JOptionPane.WARNING_MESSAGE);
+            txtBuscar.requestFocus();
+            return;
+        }
+
+        this.listar(texto);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

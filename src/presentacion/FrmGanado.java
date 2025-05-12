@@ -63,7 +63,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
         tabGeneral = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNumId = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListarGanado = new javax.swing.JTable();
@@ -146,7 +146,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNumId, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
                         .addGap(34, 34, 34)
@@ -162,7 +162,7 @@ public class FrmGanado extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNumId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(btnNuevo)
                     .addComponent(btnEditar))
@@ -419,7 +419,15 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        String texto = txtBuscar.getText().trim();
+
+        if (texto.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para buscar", "Sistema", JOptionPane.WARNING_MESSAGE);
+            txtBuscar.requestFocus();
+            return;
+        }
+
+        this.listar(texto);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -444,10 +452,10 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tabGeneral;
     private javax.swing.JTable tablaListarGanado;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtFechaRegistro;
     private javax.swing.JTextField txtGanaderoid;
-    private javax.swing.JTextField txtNumId;
     private javax.swing.JTextField txtNumIdentificacion;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtRaza;
