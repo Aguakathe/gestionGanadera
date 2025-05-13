@@ -10,6 +10,7 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
         private String accion;
         private String GanaderoIdAnt;
         
+        
     public FrmGanadero() {
         initComponents();
         this.CONTROL = new GanaderoControl();
@@ -327,10 +328,11 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tablaListar.getSelectedRow() == 1) {
+       
+        if (tablaListar.getSelectedRow() !=-1) {
             String id = String .valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(), 0));
             String ganaderoid = String.valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(), 1));
-            this.GanaderoIdAnt = String.valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(),1));
+           
             String nombre = String.valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(), 2));
             String tipodedocumento = String.valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(), 3));
             String numerodocumento = String.valueOf(tablaListar.getValueAt(tablaListar.getSelectedRow(), 4));
@@ -349,8 +351,8 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
             txtemail.setText(email);
             txtactivo.setText(activo);
             
-            Tabgeneral.setEnabledAt(0, false);
-            Tabgeneral.setEnabledAt(1, true);
+            Tabgeneral.setEnabledAt(1, false);
+            Tabgeneral.setEnabledAt(0, true);
             Tabgeneral.setSelectedIndex(1);
             this.accion = "editar";
 

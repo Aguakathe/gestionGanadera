@@ -12,6 +12,7 @@ public class GanaderoControl {
     private Ganadero obj;// OBJETO DE TIPO CATEGORIA QUE SE UTILIZA PARA MANIPULAR DATOS TEMPORALES
     private DefaultTableModel modeloTabla;// MODELO DE TABLA UTILIZADO PARA MOSTRAR DATOS EN LA INTERFAZ GRAFICA
     public int RegistrosMostrados;// varibable que almacena el numero de registros que se muestran en la tabla
+    private List<Ganadero> listaGanaderos;
 
     // constructor de la ganadero control
     public GanaderoControl() {
@@ -21,44 +22,47 @@ public class GanaderoControl {
     }
 
     public DefaultTableModel listar(String texto) {
-        List<Ganadero> lista = new ArrayList<>();
-        lista.addAll(DATOS.listar(texto));// LLENA LA LISTA CON LOS RESULTADOS DE LA LISTAS
+    List<Ganadero> lista = new ArrayList<>();
+    lista.addAll(DATOS.listar(texto)); 
+    
+    
 
-        String[] titulos = { "Id", "Tipo Documento", "N° Documento", "Teléfono", "Dirección", "Email", "Estado" };
 
-        this.modeloTabla = new DefaultTableModel(null, titulos);// Se inicializa el modelo de la tabla coon los
-                                                                // encabezados
+     
+    String[] titulos = { "GanaderoID", "Id", "Tipo Documento", "N° Documento", "Teléfono", "Dirección", "Email", "Estado" };
 
-        String estado;// Variable temporal para almacenar el estado de ccada categoria
-        String[] registro = new String[8];// Arreglo de String para almacenar los datos de cada fila;
-        this.RegistrosMostrados = 0;// Se reinicia el contador de registros
 
-        // for que recorre cada categoria obtenida de la base de datos
-        for (Ganadero item : lista) {
-            if (item.isActivo()) {// VERIFICA SI LA CATEGORIA ESTA ACTIVA O INACTIVA
-                estado = "Activo";
+    
+    this.modeloTabla = new DefaultTableModel(null, titulos);
 
-            } else {
-                estado = "Inactivo";
-            }
+    
+    String[] registro = new String[7];
 
-            registro[0] = Integer.toString(item.getId());
-            registro[1] = item.getTipo_Documento();
-            registro[2] = Integer.toString(item.getNum_Documento());
-            registro[3] = Integer.toString(item.getTelefono());
-            registro[4] = item.getDireccion();
-            registro[5] = item.getEmail();
-            registro[6] = estado;
+    
+    this.RegistrosMostrados = 0;
 
-            this.modeloTabla.addRow(registro);
-            this.RegistrosMostrados++;
-        }
+    
+    for (Ganadero item : lista) {
+       
+        String estado = item.isActivo() ? "Activo" : "Inactivo";
 
-        return this.modeloTabla;
+        registro[0] = Integer.toString(item.getId());
+        registro[1] = item.getTipo_Documento();
+        registro[2] = Integer.toString(item.getNum_Documento());
+        registro[3] = Integer.toString(item.getTelefono());
+        registro[4] = item.getDireccion();
+        registro[5] = item.getEmail();
+        registro[6] = estado;
 
+        
+        this.modeloTabla.addRow(registro);
+        this.RegistrosMostrados++;
     }
 
-    // Metodo insertarn una ueva categoria
+    return this.modeloTabla;
+}
+
+
     public String Insertar(String nombre, String direccion, String tipodocumento, int NumeroDocumento, int telefono,
             String email) {
         if (DATOS.Existe(nombre)) {
