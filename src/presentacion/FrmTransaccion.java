@@ -320,7 +320,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         }
 
         String resp;
-        if (this.accion.equals("Editar")) {
+        if (this.accion.equals("editar")) {
             // Actualizar transacción existente
             int id = Integer.parseInt(txtid.getText()); // Asegúrate de tener un txtId para la edición
             resp = this.CONTROL.actualizar(id, ganaderoId, tipoTransaccion, fecha, total, estado);
@@ -378,7 +378,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
             tabGeneral.setSelectedIndex(1);
             this.accion = "editar";
 
-            btnGuardar.setText("editar");
+            btnGuardar.setText("Editar");
 }
         else{
             this.mensajeError("Seleccione un registro a editar");
