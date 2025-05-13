@@ -25,10 +25,12 @@ public class TransaccionDAO implements CrudSimpleInterface<Transaccion> {
     public List<Transaccion> listar(String texto) {
         List<Transaccion> registros = new ArrayList<>();
         try {
-            ps = CON.conectar().prepareStatement("SELECT * FROM transaccion WHERE ganadero_id LIKE ?");
-            ps.setString(1, "%" + texto + "%");
+            // Modificar la consulta para filtrar por 'id' (ID de transacción)
+            ps = CON.conectar().prepareStatement("SELECT * FROM transaccion WHERE id LIKE ?");
+            ps.setString(1, "%" + texto + "%"); // Filtrar usando el ID de transacción
             rs = ps.executeQuery();
 
+            // Recorrer el resultado de la consulta y agregarlo a la lista
             while (rs.next()) {
                 registros.add(new Transaccion(
                         rs.getInt("id"),

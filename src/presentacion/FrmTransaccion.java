@@ -1,23 +1,19 @@
-
 package presentacion;
 
 import javax.swing.JOptionPane;
-import negocio.GanadoControl;
+
 import negocio.TransaccionControl;
 
 /**
  *
  * @author USER
  */
-
 public class FrmTransaccion extends javax.swing.JInternalFrame {
 
     private final TransaccionControl CONTROL;
     private String accion;
     private String ganadero_id_ant;
 
-
-    
     public FrmTransaccion() {
         initComponents();
         this.CONTROL = new TransaccionControl();
@@ -278,7 +274,15 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String idTransaccion = txtIdTransaccion.getText().trim();
 
+        if (idTransaccion.isEmpty()) {
+            // Si no se ingresa un ID, muestra un mensaje de error
+            mensajeError("Por favor ingresa un ID de transacción para buscar.");
+        } else {
+            // Llamar al método listar pasando el ID como parámetro
+            listar(idTransaccion);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -286,6 +290,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setSelectedIndex(1);
         this.accion = "Guardar";
+        btnGuardar.setText("Guardar");
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -297,60 +302,60 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (txtGanaderoid.getText().length() == 0) {
-        JOptionPane.showMessageDialog(this, "Debes ingresar un ID de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
-        txtGanaderoid.requestFocus();
-        return;
-    }
-
-    try {
-        // Conversión de datos
-        int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
-        String tipoTransaccion = txtTipoTransaccion.getText().trim();
-        String fecha = txtFecha.getText().trim();
-        double total = Double.parseDouble(txtTotal.getText());
-        String estado = txtEstado.getText().trim().toLowerCase();
-
-        // Validación del estado
-        if (!estado.equals("pendiente") && !estado.equals("completado") && !estado.equals("cancelado")) {
-            JOptionPane.showMessageDialog(this, "Estado inválido. Usa: pendiente, completado o cancelado", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debes ingresar un ID de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
+            txtGanaderoid.requestFocus();
             return;
         }
 
-        String resp;
-        if (this.accion.equals("editar")) {
-            // Actualizar transacción existente
-            int id = Integer.parseInt(txtid.getText()); // Asegúrate de tener un txtId para la edición
-            resp = this.CONTROL.actualizar(id, ganaderoId, tipoTransaccion, fecha, total, estado);
+        try {
+            // Conversión de datos
+            int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
+            String tipoTransaccion = txtTipoTransaccion.getText().trim();
+            String fecha = txtFecha.getText().trim();
+            double total = Double.parseDouble(txtTotal.getText());
+            String estado = txtEstado.getText().trim().toLowerCase();
 
-            if (resp.equals("OK")) {
-                this.mensajeOK("Transacción actualizada correctamente");
-                this.limpiar();
-                this.listar("");
-                tabGeneral.setSelectedIndex(0);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setEnabledAt(1, false);
-            } else {
-                this.mensajeError(resp);
+            // Validación del estado
+            if (!estado.equals("pendiente") && !estado.equals("completado") && !estado.equals("cancelado")) {
+                JOptionPane.showMessageDialog(this, "Estado inválido. Usa: pendiente, completado o cancelado", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        } else {
-            // Insertar nueva transacción
-            resp = this.CONTROL.insertar(ganaderoId, tipoTransaccion, fecha, total, estado);
 
-            if (resp.equals("OK")) {
-                this.mensajeOK("Transacción registrada correctamente");
-                this.limpiar();
-                this.listar("");
-                tabGeneral.setSelectedIndex(0);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setEnabledAt(1, false);
+            String resp;
+            if (this.accion.equals("editar")) {
+                // Actualizar transacción existente
+                int id = Integer.parseInt(txtid.getText()); // Asegúrate de tener un txtId para la edición
+                resp = this.CONTROL.actualizar(id, ganaderoId, tipoTransaccion, fecha, total, estado);
+
+                if (resp.equals("OK")) {
+                    this.mensajeOK("Transacción actualizada correctamente");
+                    this.limpiar();
+                    this.listar("");
+                    tabGeneral.setSelectedIndex(0);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setEnabledAt(1, false);
+                } else {
+                    this.mensajeError(resp);
+                }
             } else {
-                this.mensajeError(resp);
+                // Insertar nueva transacción
+                resp = this.CONTROL.insertar(ganaderoId, tipoTransaccion, fecha, total, estado);
+
+                if (resp.equals("OK")) {
+                    this.mensajeOK("Transacción registrada correctamente");
+                    this.limpiar();
+                    this.listar("");
+                    tabGeneral.setSelectedIndex(0);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setEnabledAt(1, false);
+                } else {
+                    this.mensajeError(resp);
+                }
             }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa un número válido en el campo Total o ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Por favor ingresa un número válido en el campo Total o ID.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -362,29 +367,25 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
             String fecha = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 3));
             String total = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 4));
             String estado = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 5));
-            
+
             txtid.setText(id); //me confunde, mirar despues 
             txtGanaderoid.setText(ganaderoId);
             txtTipoTransaccion.setText(tipoTransaccion);
             txtFecha.setText(fecha);
             txtTotal.setText(total);
             txtEstado.setText(estado);
-            
+
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
             this.accion = "editar";
 
-
-            btnGuardar.setText("Editar Transacción");
-
             btnGuardar.setText("Editar");
 
-}
-        else{
+        } else {
             this.mensajeError("Seleccione un registro a editar");
         }
-        
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
 
