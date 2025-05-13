@@ -100,7 +100,7 @@
                   <KeyStroke key="Alt+D"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="Detalle de Trasaccion"/>
+                <Property name="text" type="java.lang.String" value="Detalle de Transaccion"/>
               </Properties>
             </MenuItem>
           </SubComponents>

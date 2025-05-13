@@ -12,16 +12,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransaccion> {
-
+    
     private final Conexion con;
     private PreparedStatement ps;
     private ResultSet rs;
     private boolean respuesta;
-
+    
     public DetalletransaccionDAO() {
         con = Conexion.getInstancia();
     }
-
+    
     @Override
     public List<DetalleTransaccion> listar(String texto) {
         List<DetalleTransaccion> registro = new ArrayList<>();
@@ -29,14 +29,22 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             ps = con.conectar().prepareStatement("SELECT * FROM detalle_transaccion WHERE id_transaccion LIKE ?");
             ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
-
+            
             while (rs.next()) {
                 registro.add(new DetalleTransaccion(
                         rs.getInt(1),
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getDouble(4),
-                        rs.getInt(5)));
+                        rs.getInt(5),
+                rs.getString(6)));
+            
+            
+            
+            
+            
+            
+           
             }
 
             ps.close();
@@ -50,7 +58,7 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         }
         return registro;
     }
-
+    
     @Override
     public boolean insertar(DetalleTransaccion obj) {
         respuesta = false;
@@ -61,11 +69,11 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             ps.setInt(2, obj.getId_ganado());
             ps.setDouble(3, obj.getPrecio_Unitario());
             ps.setInt(4, obj.getCantidad());
-
+            
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-
+            
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -75,7 +83,7 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         }
         return respuesta;
     }
-
+    
     @Override
     public boolean actualizar(DetalleTransaccion obj) {
         respuesta = false;
@@ -87,11 +95,11 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             ps.setDouble(3, obj.getPrecio_Unitario());
             ps.setInt(4, obj.getCantidad());
             ps.setInt(5, obj.getId());
-
+            
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-
+            
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -101,18 +109,18 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         }
         return respuesta;
     }
-
+    
     @Override
     public boolean eliminar(int id) {
         respuesta = false;
         try {
             ps = con.conectar().prepareStatement("DELETE FROM detalle_transaccion WHERE id = ?");
             ps.setInt(1, id);
-
+            
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
-
+            
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -121,34 +129,34 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             con.desconectar();
         }
         return respuesta;
-    }public boolean Existe(int idTransaccion, int idGanado) {
-    respuesta = false;
-    try {
-        ps = con.conectar().prepareStatement(
-            "SELECT id FROM DetalleTransaccion WHERE idTransaccion = ? AND idGanado = ?"
-        );
-        ps.setInt(1, idTransaccion);
-        ps.setInt(2, idGanado);
-        rs = ps.executeQuery();
-
-        if (rs.next()) {
-            respuesta = true;
-        }
-
-        ps.close();
-        rs.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-    } finally {
-        ps = null;
-        rs = null;
-        con.desconectar();
     }
-    return respuesta;
-}
-
-   
-
+    
+    public boolean Existe(int idTransaccion, int idGanado) {
+        respuesta = false;
+        try {
+            ps = con.conectar().prepareStatement(
+                    "SELECT id FROM DetalleTransaccion WHERE idTransaccion = ? AND idGanado = ?"
+            );
+            ps.setInt(1, idTransaccion);
+            ps.setInt(2, idGanado);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                respuesta = true;
+            }
+            
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            con.desconectar();
+        }
+        return respuesta;
+    }
+    
     @Override
     public int total() {
         int total = 0;
@@ -169,5 +177,5 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         }
         return total;
     }
-
+    
 }

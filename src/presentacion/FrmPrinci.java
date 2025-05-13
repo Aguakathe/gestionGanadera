@@ -122,7 +122,7 @@ public class FrmPrinci extends javax.swing.JFrame {
 
         aboutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("Detalle de Trasaccion");
+        aboutMenuItem.setText("Detalle de Transaccion");
         menuTransacciones.add(aboutMenuItem);
 
         menuBar.add(menuTransacciones);
