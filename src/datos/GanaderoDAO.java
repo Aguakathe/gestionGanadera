@@ -26,7 +26,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public List<Ganadero> listar(String texto) {
         List<Ganadero> registro = new ArrayList<>();
         try {
-            ps = con.conectar().prepareStatement("SELECT * FROM categoria WHERE nombre LIKE ?");
+            ps = con.conectar().prepareStatement("SELECT * FROM ganadero WHERE nombre LIKE ?");
             ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
 
@@ -51,7 +51,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean insertar(Ganadero obj) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("INSERT INTO Ganadero (nombre, Email, activo) VALUES (?, ?, 1)");
+            ps = con.conectar().prepareStatement("INSERT INTO ganadero (nombre, Email, activo) VALUES (?, ?, 1)");
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getDireccion());
 
@@ -73,7 +73,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean actualizar(Ganadero obj) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("UPDATE Ganadero SET nombre = ?, Email = ? WHERE id = ?");
+            ps = con.conectar().prepareStatement("UPDATE ganadero SET nombre = ?, Email = ? WHERE id = ?");
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getEmail());
             ps.setInt(3, obj.getId());
@@ -96,7 +96,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean eliminar(int id) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("UPDATE Ganadero SET activo = 0 WHERE id = ?");
+            ps = con.conectar().prepareStatement("UPDATE ganadero SET activo = 0 WHERE id = ?");
             ps.setInt(1, id);
 
             if (ps.executeUpdate() > 0) {
@@ -116,7 +116,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean Existe(String texto) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("SELECT nombre FROM categoria WHERE nombre=?");
+            ps = con.conectar().prepareStatement("SELECT nombre FROM ganadero WHERE nombre=?");
             ps.setString(1, texto);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -136,7 +136,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean desactivar(int id) {
         boolean respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
+            ps = con.conectar().prepareStatement("UPDATE ganadero SET activo=0 WHERE id=?");
             ps.setInt(1, id);
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -151,29 +151,30 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         return respuesta;
     }
 
-    public boolean activar(int id) {
-        boolean respuesta = false;
-        try {
-            ps = con.conectar().prepareStatement("UPDATE Categoria SET activo=0 WHERE id=?");
-            ps.setInt(1, id);
-            if (ps.executeUpdate() > 0) {
-                respuesta = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            con.desconectar();
+   public boolean activar(int id) {
+    boolean respuesta = false;
+    try {
+        ps = con.conectar().prepareStatement("UPDATE ganadero SET activo=1 WHERE id=?");
+        ps.setInt(1, id);
+        if (ps.executeUpdate() > 0) {
+            respuesta = true;
         }
-        return respuesta;
+        ps.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+    } finally {
+        ps = null;
+        con.desconectar();
     }
+    return respuesta;
+}
+
 
     @Override
     public int total() {
         int total = 0;
         try {
-            ps = con.conectar().prepareStatement("SELECT COUNT(id) FROM Ganadero");
+            ps = con.conectar().prepareStatement("SELECT COUNT(id) FROM ganadero");
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt(1);

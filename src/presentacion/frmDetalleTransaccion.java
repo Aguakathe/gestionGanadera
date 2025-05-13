@@ -1,6 +1,7 @@
 
 package presentacion;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import negocio.GanadoControl;
 import negocio.DetalleTransaccionControl;
@@ -17,11 +18,13 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
         tabgenreañ.setEnabledAt(1, false);
         this.accion = "";
         txtid.setVisible(false);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+    this.setResizable(true);
     }
      private void listar(String texto) {
         tabladetaller.setModel(this.CONTROL.listar(texto));
         //Mostrando el total Mostardo (Método creado en CategoriaCotrol) y mostrando el total acumulativo de la base de datos
-        ibtotalreghistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
+        ibtotalreghistros.setText("Mostrando " + this.CONTROL.total()+ " de un total de " + this.CONTROL.total());
     }
      private void limpiar() {
         txtIdganadi.setText("");
@@ -69,8 +72,11 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
         txtid = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
+
+        setClosable(true);
+        setMaximizable(true);
+
+        tabgenreañ.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel1.setText("Id transaccion ");
 
@@ -92,13 +98,10 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
 
         tabladetaller.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tabladetaller);
@@ -148,6 +151,8 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
 
         tabgenreañ.addTab("Listar", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setText("Id ganadero ");
 
         jLabel3.setText("Id transaccion");
@@ -172,8 +177,6 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setText("estado");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -181,38 +184,33 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(164, 164, 164))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnguardar)
-                            .addGap(163, 163, 163))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(202, 202, 202)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btncancelar)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(164, 164, 164)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                             .addComponent(txtganaderoid, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTransaccioniddd, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIdganadi, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtcantidad, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(153, 153, 153)
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(163, Short.MAX_VALUE))
+                        .addGap(98, 98, 98)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(218, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnguardar)
+                        .addGap(49, 49, 49)
+                        .addComponent(btncancelar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,31 +220,27 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtganaderoid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTransaccioniddd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTransaccioniddd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdganadi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncancelar)
                     .addComponent(btnguardar))
-                .addGap(92, 92, 92))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         tabgenreañ.addTab("Editar", jPanel2);
@@ -291,11 +285,8 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
             int idganado = Integer.parseInt(txtIdganadi.getText());
             double precio = Double.parseDouble(txtPrecio.getText().trim());
             int cantidad = Integer.parseInt(txtcantidad.getText());
-             String estado = txtEstado.getText().trim().toLowerCase();
-             if (!estado.equals("pendiente") && !estado.equals("completado") && !estado.equals("cancelado")) {
-            JOptionPane.showMessageDialog(this, "Estado inválido. Usa: pendiente, completado o cancelado", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+             
+            
              String resp;
              
              if (this.accion.equals("Editar")) {
@@ -311,8 +302,8 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
                 this.mensajeError(resp);
             }
         } else {
-            // Insertar nueva transacción
-            resp = this.CONTROL.Insertar(idtransaccion, idganado, precio, cantidad,estado);
+            
+            resp = this.CONTROL.Insertar(idtransaccion, idganado, precio, cantidad);
 
             if (resp.equals("OK")) {
                 this.mensajeOK("Transacción registrada correctamente");
@@ -341,14 +332,14 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
             String idganado = String.valueOf(tabladetaller.getValueAt(tabladetaller.getSelectedRow(), 2));
             String precio = String.valueOf(tabladetaller.getValueAt(tabladetaller.getSelectedRow(), 3));
             String cantidad = String.valueOf(tabladetaller.getValueAt(tabladetaller.getSelectedRow(), 4));
-            String estado = String.valueOf(tabladetaller.getValueAt(tabladetaller.getSelectedRow(), 5));
+            
             
             txtid.setText(id); 
             txtganaderoid.setText(ganaderoId);
             txtIdganadi.setText(idganado);
             txtPrecio.setText(precio);
             txtcantidad.setText(cantidad);
-            txtEstado.setText(estado);
+            
             
             tabgenreañ.setEnabledAt(0, false);
             tabgenreañ.setEnabledAt(1, true);
@@ -356,7 +347,9 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
             this.accion = "editar";
 
             btnguardar.setText("editar");
-}
+}else{
+            this.mensajeError("Seleccione un registro a editar");
+        } 
     }//GEN-LAST:event_btneditarActionPerformed
 
 
@@ -373,13 +366,11 @@ public class frmDetalleTransaccion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tabgenreañ;
     private javax.swing.JTable tabladetaller;
-    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtIdganadi;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtTransaccioniddd;

@@ -1,5 +1,6 @@
 
 package presentacion;
+import javax.swing.JFrame;
 import negocio.GanaderoControl;
 import javax.swing.JOptionPane;
 
@@ -13,9 +14,10 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
         initComponents();
         this.CONTROL = new GanaderoControl();
         this.listar("");
-        Tabgeneral.setEnabledAt(1, false);
+        Tabgeneral.setEnabledAt(0, false);
         this.accion = "";
         txtid.setVisible(false);
+        
 
         
         
@@ -79,6 +81,13 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
         ibtotalregistros = new javax.swing.JLabel();
         btnActivar = new javax.swing.JButton();
         btnDesactivar = new javax.swing.JButton();
+
+        setClosable(true);
+        setMaximizable(true);
+
+        Tabgeneral.setBackground(new java.awt.Color(204, 255, 204));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel1.setText("Ganadero id");
 
@@ -144,7 +153,7 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                             .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +195,7 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGaurdar)
                     .addComponent(btncancelar))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         Tabgeneral.addTab("Editar", jPanel1);
@@ -211,13 +220,13 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
 
         tablaListar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tablaListar);
@@ -246,8 +255,10 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(86, 86, 86)
@@ -257,15 +268,14 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                                 .addGap(56, 56, 56)
                                 .addComponent(btnNuevo)
                                 .addGap(47, 47, 47)
-                                .addComponent(btnEditar)))
-                        .addContainerGap(87, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnActivar)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnDesactivar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ibtotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(179, 179, 179))))
+                                .addComponent(btnEditar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnActivar)
+                                .addGap(52, 52, 52)
+                                .addComponent(btnDesactivar)
+                                .addGap(143, 143, 143)
+                                .addComponent(ibtotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(71, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +287,7 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscar)
                     .addComponent(btnNuevo)
                     .addComponent(btnEditar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +295,7 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                         .addComponent(btnDesactivar)
                         .addComponent(ibtotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnActivar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         Tabgeneral.addTab("Listar ", jPanel2);
@@ -294,25 +304,26 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Tabgeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Tabgeneral)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tabgeneral)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Tabgeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        Tabgeneral.setEnabledAt(1, true);
-        Tabgeneral.setEnabledAt(0, false);
-        Tabgeneral.setSelectedIndex(1);
-        this.accion = "guardar";
+        Tabgeneral.setEnabledAt(0, true);
+        Tabgeneral.setEnabledAt(1, false);
+        Tabgeneral.setSelectedIndex(0);
+        this.accion = "Guardar";
         btnGaurdar.setText("Guardar");
+        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -350,9 +361,9 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        Tabgeneral.setEnabledAt(0, true);
-        Tabgeneral.setEnabledAt(1, false);
-        Tabgeneral.setSelectedIndex(0);
+        Tabgeneral.setEnabledAt(1, true);
+        Tabgeneral.setEnabledAt(0, false);
+        Tabgeneral.setSelectedIndex(1);
         this.limpiar();
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -389,8 +400,8 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                     this.limpiar();
                     this.listar("");
                      Tabgeneral.setSelectedIndex(0);
-                    Tabgeneral.setEnabledAt(0, true);
-                    Tabgeneral.setEnabledAt(1, false);
+                    Tabgeneral.setEnabledAt(1, true);
+                    Tabgeneral.setEnabledAt(0, false);
                 }else{
                     this.mensajeError(resp);
                 }
@@ -400,9 +411,9 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
                     this.mensajeOK("Registrado correctamente");
                     this.limpiar();
                     this.listar("");
-                    Tabgeneral.setSelectedIndex(0);
-                    Tabgeneral.setEnabledAt(0, true);
-                    Tabgeneral.setEnabledAt(1, false);
+                    Tabgeneral.setSelectedIndex(1);
+                    Tabgeneral.setEnabledAt(1, true);
+                    Tabgeneral.setEnabledAt(0, false);
                 } else {
                     this.mensajeError(resp);
                 }
@@ -443,8 +454,8 @@ public class FrmGanadero extends javax.swing.JInternalFrame {
     private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
        int fila = tablaListar.getSelectedRow();
     if (fila != -1) {
-        String id = String.valueOf(tablaListar.getValueAt(fila, 0));
-        String nombre = String.valueOf(tablaListar.getValueAt(fila, 1));
+        String id = String.valueOf(tablaListar.getValueAt(fila, 1));
+        String nombre = String.valueOf(tablaListar.getValueAt(fila, 0));
         int confirmacion = JOptionPane.showConfirmDialog(
                 this,
                 "¿Deseas desactivar el registro \"" + nombre + "\"?",

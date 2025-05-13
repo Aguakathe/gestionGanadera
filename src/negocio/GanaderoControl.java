@@ -24,12 +24,13 @@ public class GanaderoControl {
         List<Ganadero> lista = new ArrayList<>();
         lista.addAll(DATOS.listar(texto));// LLENA LA LISTA CON LOS RESULTADOS DE LA LISTAS
 
-        String[] titulos = { "Id", "Nombre", "Descripcion", "Estado" };// Encabezados de las columnas
+        String[] titulos = { "Id", "Tipo Documento", "N° Documento", "Teléfono", "Dirección", "Email", "Estado" };
+
         this.modeloTabla = new DefaultTableModel(null, titulos);// Se inicializa el modelo de la tabla coon los
                                                                 // encabezados
 
         String estado;// Variable temporal para almacenar el estado de ccada categoria
-        String[] registro = new String[4];// Arreglo de String para almacenar los datos de cada fila;
+        String[] registro = new String[8];// Arreglo de String para almacenar los datos de cada fila;
         this.RegistrosMostrados = 0;// Se reinicia el contador de registros
 
         // for que recorre cada categoria obtenida de la base de datos
@@ -119,7 +120,7 @@ public class GanaderoControl {
     // Metodo desactivar
     public String Desactivar(int id) {
         if (DATOS.desactivar(id)) {
-            return "Ok";
+            return "OK";
         } else {
             return "No se puede desactivar el registro";
         }
@@ -128,7 +129,7 @@ public class GanaderoControl {
     // METODO PARA ACTIVAR UNA CATEGORIA
     public String Activar(int id) {
         if (DATOS.activar(id)) {
-            return "Ok";
+            return "OK";
 
         } else {
             return "No se puede activar el registro";

@@ -1,5 +1,5 @@
-
 package negocio;
+
 import datos.DetalletransaccionDAO;
 import entidades.DetalleTransaccion;
 import java.util.ArrayList;
@@ -19,48 +19,53 @@ public class DetalleTransaccionControl {
         this.RegistrosMostrados = 0;
     }
 
+    // Método listar, con arreglo de tamaño 6 para incluir la columna "Estado"
     public DefaultTableModel listar(String texto) {
         List<DetalleTransaccion> lista = new ArrayList<>();
         lista.addAll(DATOS.listar(texto));
 
-        String[] titulos = {"Id", "IdTransaccion", "IdGanado", "PrecioUnitario", "Cantidad"};
+        // Columnas de la tabla, incluyendo "Estado"
+        String[] titulos = {"Id", "IdTransaccion", "IdGanado", "PrecioUnitario", "Cantidad", "Estado"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
-        String[] registro = new String[5];
+        String[] registro = new String[6]; 
         this.RegistrosMostrados = 0;
 
+        // Agregar los registros a la tabla
         for (DetalleTransaccion item : lista) {
             registro[0] = Integer.toString(item.getId());
             registro[1] = Integer.toString(item.getId_transaccion());
             registro[2] = Integer.toString(item.getId_ganado());
             registro[3] = Double.toString(item.getPrecio_Unitario());
             registro[4] = Integer.toString(item.getCantidad());
-            registro[5] = item.getEstado();
+           
             this.modeloTabla.addRow(registro);
             this.RegistrosMostrados++;
         }
-        
 
         return this.modeloTabla;
     }
-    
-    public String Insertar(int idTransaccion, int idGanado, double precioUnitario, int cantidad,String estado) {
-    if (DATOS.Existe(idTransaccion, idGanado)) {
-        return "El registro ya existe.";
-    } else {
-        obj.setId_transaccion(idTransaccion);
-        obj.setId_ganado(idGanado);
-        obj.setCantidad(cantidad);
-        obj.setPrecio_Unitario(precioUnitario);
-        obj.setEstado(estado);
 
-        if (DATOS.insertar(obj)) {
-            return "Ok";
+    // Método para insertar un nuevo registro
+    public String Insertar(int idTransaccion, int idGanado, double precioUnitario, int cantidad ) {
+        if (DATOS.existe(idTransaccion, idGanado)) {  
+            return "El registro ya existe.";
         } else {
-            return "Error en el registro.";
+            obj.setId_transaccion(idTransaccion);
+            obj.setId_ganado(idGanado);
+            obj.setCantidad(cantidad);
+            obj.setPrecio_Unitario(precioUnitario);
+            
+
+            if (DATOS.insertar(obj)) {
+                return "Ok";
+            } else {
+                return "Error en el registro.";
+            }
         }
     }
-}
+
+    // Método para actualizar un registro
     public String Actualizar(int id, int idtransaccion, int idganado, double perciounitario, int cantidad, int idanterior) {
         if (id ==(idanterior)) {
             obj.setId(id);
@@ -68,39 +73,36 @@ public class DetalleTransaccionControl {
             obj.setId_ganado(idganado);
             obj.setPrecio_Unitario(perciounitario);
             obj.setCantidad(cantidad);
-            
 
             if (DATOS.actualizar(obj)) {
                 return "Ok";
             } else {
-                return "Error en la  actualizacion";
+                return "Error en la actualización";
             }
-        } else {//Si se cambuio el nombre se verifica que no exista otro registro con ese nombre
-            if (DATOS.Existe(idtransaccion, idganado)) {
-                return "El registro ya exite";
-
+        } else { 
+            // Si se cambió el nombre, se verifica que no exista otro registro con ese nombre
+            if (DATOS.existe(idtransaccion, idganado)) {
+                return "El registro ya existe";
             } else {
-               obj.setId(id);
-            obj.setId_transaccion(idtransaccion);
-            obj.setId_ganado(idganado);
-            obj.setPrecio_Unitario(perciounitario);
-            obj.setCantidad(cantidad);
+                obj.setId(id);
+                obj.setId_transaccion(idtransaccion);
+                obj.setId_ganado(idganado);
+                obj.setPrecio_Unitario(perciounitario);
+                obj.setCantidad(cantidad);
+
                 if (DATOS.actualizar(obj)) {
                     return "Ok";
                 } else {
-                    return "Error en la  actualizacion";
+                    return "Error en la actualización";
                 }
             }
-
         }
     }
 
-
+    // Método para contar el total de registros
     public int total() {
         return DATOS.total();
     }
-
-    public int totalMostrados() {
-        return this.RegistrosMostrados;
-    }
 }
+
+    // Método para contar los registros mostrados

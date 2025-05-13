@@ -72,6 +72,11 @@ public class FrmPrinci extends javax.swing.JFrame {
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK));
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Gestionar Ganaderos");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         menuGanaderia.add(saveMenuItem);
 
         menuBar.add(menuGanaderia);
@@ -123,6 +128,11 @@ public class FrmPrinci extends javax.swing.JFrame {
         aboutMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("Detalle de Transaccion");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         menuTransacciones.add(aboutMenuItem);
 
         menuBar.add(menuTransacciones);
@@ -196,6 +206,18 @@ public class FrmPrinci extends javax.swing.JFrame {
         Escritorio.add(frm);
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        FrmGanadero frm = new FrmGanadero();
+        Escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        frmDetalleTransaccion frm = new frmDetalleTransaccion();
+        Escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

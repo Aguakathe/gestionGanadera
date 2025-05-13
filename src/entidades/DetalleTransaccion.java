@@ -6,16 +6,16 @@ public class DetalleTransaccion {
     private int id_ganado;
     private double precio_Unitario;
     private int cantidad;
-    private String estado;
+   
     
 
-    public DetalleTransaccion(int id, int id_transaccion, int id_ganado, double precio_Unitario, int cantidad, String estado) {
+    public DetalleTransaccion(int id, int id_transaccion, int id_ganado, double precio_Unitario, int cantidad) {
         this.id = id;
         this.id_transaccion = id_transaccion;
         this.id_ganado = id_ganado;
         this.precio_Unitario = precio_Unitario;
         this.cantidad = cantidad;
-        this.estado = estado;
+       
     }
     public DetalleTransaccion(){
         
@@ -23,13 +23,7 @@ public class DetalleTransaccion {
 
     
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
     
     
 

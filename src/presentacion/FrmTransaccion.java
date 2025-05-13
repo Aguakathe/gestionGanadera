@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package presentacion;
 
 import javax.swing.JOptionPane;
@@ -378,7 +375,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
             tabGeneral.setSelectedIndex(1);
             this.accion = "editar";
 
-            btnGuardar.setText("editar");
+            btnGuardar.setText("Editar Transacción");
 }
         else{
             this.mensajeError("Seleccione un registro a editar");
