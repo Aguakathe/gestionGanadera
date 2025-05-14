@@ -6,6 +6,7 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JDesktopPane;
 
 /**
  *
@@ -13,12 +14,17 @@ import java.awt.Graphics;
  */
 public class FrmPrinci extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPrinci
-     */
+    public JDesktopPane JDesktopPane_menu;
+    
     public FrmPrinci() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        //nuevo codigo
+       JDesktopPane_menu = new JDesktopPane();
+        
+        FrmRegistrosVentas frm = new FrmRegistrosVentas();
+        Escritorio.add(frm);
+        frm.setVisible(true);
     }
 
     /**
@@ -50,7 +56,6 @@ public class FrmPrinci extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,14 +144,20 @@ public class FrmPrinci extends javax.swing.JFrame {
 
         menuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/iconos/conversation.png"))); // NOI18N
         menuConsultas.setText("Consultas");
+        menuConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuConsultasActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem1.setText("Consultar Transaccion");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menuConsultas.add(jMenuItem1);
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem2.setText("Consultar Ganado");
-        menuConsultas.add(jMenuItem2);
 
         menuBar.add(menuConsultas);
 
@@ -219,6 +230,16 @@ public class FrmPrinci extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    private void menuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConsultasActionPerformed
+
+    }//GEN-LAST:event_menuConsultasActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmRegistrosVentas frm = new FrmRegistrosVentas();
+        Escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,13 +276,12 @@ public class FrmPrinci extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane Escritorio;
+    public static javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuConsultas;
