@@ -369,7 +369,7 @@ public class FrmTransaccion extends javax.swing.JInternalFrame {
             String total = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 4));
             String estado = String.valueOf(tablaListarTransacciones.getValueAt(tablaListarTransacciones.getSelectedRow(), 5));
 
-            txtid.setText(id); //me confunde, mirar despues 
+            txtid.setText(id); 
             txtGanaderoid.setText(ganaderoId);
             txtTipoTransaccion.setText(tipoTransaccion);
             txtFecha.setText(fecha);

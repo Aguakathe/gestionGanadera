@@ -1,17 +1,14 @@
-
 package presentacion;
 
 import javax.swing.JOptionPane;
 import negocio.DetalleTransaccionControl;
 
-
-
 public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
 
-   private final DetalleTransaccionControl CONTROL;
+    private final DetalleTransaccionControl CONTROL;
     private String accion;
     private String ganadero_id_ant;
-    
+
     public FrmDetalleTransaction() {
         initComponents();
         this.CONTROL = new DetalleTransaccionControl();
@@ -20,28 +17,30 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
         this.accion = "";
         txtid.setVisible(false);
     }
-    
+
     private void listar(String texto) {
         TablaRegistrosDetalles.setModel(this.CONTROL.listar(texto));
-        //Mostrando el total Mostardo (Método creado en CategoriaCotrol) y mostrando el total acumulativo de la base de datos
         ibTotalRegistros.setText("Mostrando " + this.CONTROL.totalMostrados() + " de un total de " + this.CONTROL.total());
     }
 
     private void limpiar() {
+        txtid.setText("");
         txtIdTransaccion.setText("");
         txtGanaderoId.setText("");
         txtPrecioUnitario.setText("");
         txtCantidad.setText("");
         this.accion = "guardar";
+        btnGuardar.setText("Guardar");
     }
 
     private void mensajeError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Sistema ", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Sistema", JOptionPane.ERROR_MESSAGE);
     }
 
     private void mensajeOK(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Sistema ", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +54,6 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,8 +79,6 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID Detalle Transacción:");
 
-        btnBuscar.setText("Buscar");
-
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +87,11 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         TablaRegistrosDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,9 +119,7 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(53, 53, 53)
-                            .addComponent(btnBuscar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(137, 137, 137)
                             .addComponent(btnNuevo)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnEditar))))
@@ -133,7 +132,6 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar)
                     .addComponent(btnNuevo)
                     .addComponent(btnEditar))
                 .addGap(24, 24, 24)
@@ -190,10 +188,9 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtGanaderoId, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtGanaderoId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(txtPrecioUnitario)
+                            .addComponent(txtCantidad)
                             .addComponent(txtIdTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
                         .addGap(24, 24, 24)
                         .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,11 +248,10 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        limpiar();
         tabGeneral.setEnabledAt(1, true);
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setSelectedIndex(1);
-        this.accion = "Guardar";
-        btnGuardar.setText("Guardar");
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
@@ -266,17 +262,77 @@ public class FrmDetalleTransaction extends javax.swing.JInternalFrame {
         tabGeneral.setEnabledAt(0, true);
         tabGeneral.setEnabledAt(1, false);
         tabGeneral.setSelectedIndex(0);
-        this.limpiar();
+        limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
+        String idTransaccion = txtIdTransaccion.getText().trim();
+        String idGanado = txtGanaderoId.getText().trim();
+        String precioUnitario = txtPrecioUnitario.getText().trim();
+        String cantidad = txtCantidad.getText().trim();
+
+        if (idTransaccion.isEmpty() || idGanado.isEmpty() || precioUnitario.isEmpty() || cantidad.isEmpty()) {
+            mensajeError("Todos los campos son obligatorios.");
+            return;
+        }
+
+        try {
+            int transaccionId = Integer.parseInt(idTransaccion);
+            int ganadoId = Integer.parseInt(idGanado);
+            double precio = Double.parseDouble(precioUnitario);
+            int cant = Integer.parseInt(cantidad);
+
+            String resp;
+            if (this.accion.equals("editar")) {
+                int id = Integer.parseInt(txtid.getText().trim());
+                resp = CONTROL.actualizar(id, transaccionId, ganadoId, precio, cant);
+            } else {
+                resp = CONTROL.insertar(transaccionId, ganadoId, precio, cant);
+            }
+
+            if (resp.equals("OK")) {
+                mensajeOK("Registro guardado correctamente.");
+                limpiar();
+                listar(txtBuscar.getText().trim());
+                tabGeneral.setSelectedIndex(0);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setEnabledAt(1, false);
+            } else {
+                mensajeError(resp);
+            }
+
+        } catch (NumberFormatException e) {
+            mensajeError("Verifica que todos los campos numéricos contengan valores válidos.");
+        }
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        if (TablaRegistrosDetalles.getSelectedRowCount() == 1) {
+            txtid.setText(String.valueOf(TablaRegistrosDetalles.getValueAt(TablaRegistrosDetalles.getSelectedRow(), 0)));
+            txtIdTransaccion.setText(String.valueOf(TablaRegistrosDetalles.getValueAt(TablaRegistrosDetalles.getSelectedRow(), 1)));
+            txtGanaderoId.setText(String.valueOf(TablaRegistrosDetalles.getValueAt(TablaRegistrosDetalles.getSelectedRow(), 2)));
+            txtPrecioUnitario.setText(String.valueOf(TablaRegistrosDetalles.getValueAt(TablaRegistrosDetalles.getSelectedRow(), 3)));
+            txtCantidad.setText(String.valueOf(TablaRegistrosDetalles.getValueAt(TablaRegistrosDetalles.getSelectedRow(), 4)));
+
+            this.accion = "editar";
+            btnGuardar.setText("Editar");
+            tabGeneral.setEnabledAt(0, false);
+            tabGeneral.setEnabledAt(1, true);
+            tabGeneral.setSelectedIndex(1);
+        } else {
+            mensajeError("Selecciona un registro para editar.");
+        }
+
+
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaRegistrosDetalles;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;

@@ -21,10 +21,6 @@ public class FrmPrinci extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         //nuevo codigo
        JDesktopPane_menu = new JDesktopPane();
-        
-        FrmRegistrosVentas frm = new FrmRegistrosVentas();
-        Escritorio.add(frm);
-        frm.setVisible(true);
     }
 
     /**
