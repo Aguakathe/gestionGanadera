@@ -1,4 +1,3 @@
-
 package presentacion;
 
 import database.Conexion;
@@ -9,6 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.util.ArrayList;
  */
 public class FrmGraficaVenta extends javax.swing.JInternalFrame {
 
-      ArrayList<String> fechas = new ArrayList<>();
+    ArrayList<String> fechas = new ArrayList<>();
     ArrayList<Integer> compras = new ArrayList<>();
     ArrayList<Integer> ventas = new ArrayList<>();
 
@@ -28,7 +30,14 @@ public class FrmGraficaVenta extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setResizable(true);
         cargarDatos();
-        
+
+        PanelGrafica panelGrafica = new PanelGrafica(fechas, compras, ventas);
+        JScrollPane scrollPane = new JScrollPane(panelGrafica);
+        scrollPane.setPreferredSize(new Dimension(780, 550));
+
+        panelPrincipal.setLayout(new java.awt.BorderLayout());
+        panelPrincipal.add(scrollPane, java.awt.BorderLayout.CENTER);
+
     }
 
     /**
@@ -40,6 +49,7 @@ public class FrmGraficaVenta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPrincipal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -48,31 +58,41 @@ public class FrmGraficaVenta extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Súper Grafica");
 
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(294, 294, 294)
+                .addComponent(jLabel1)
+                .addContainerGap(314, Short.MAX_VALUE))
+        );
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addContainerGap(371, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jLabel1)
-                .addContainerGap(325, Short.MAX_VALUE))
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addContainerGap(370, Short.MAX_VALUE))
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-     private void cargarDatos() {
+    private void cargarDatos() {
         try (Connection cn = Conexion.getInstancia().conectar()) {
             String sql = "SELECT fecha, tipo_transaccion, COUNT(*) as total FROM transaccion "
-                       + "WHERE fecha BETWEEN ? AND ? GROUP BY fecha, tipo_transaccion";
+                    + "WHERE fecha BETWEEN ? AND ? GROUP BY fecha, tipo_transaccion";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, FrmRegistrosVentas.fecha_inicio);
             pst.setString(2, FrmRegistrosVentas.fecha_fin);
@@ -102,41 +122,11 @@ public class FrmGraficaVenta extends javax.swing.JInternalFrame {
         }
     }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-
-        if (fechas.isEmpty()) {
-            g.setColor(Color.RED);
-            g.drawString("No hay datos disponibles para graficar.", 100, 100);
-            return;
-        }
-
-        int y = 100;
-        int max = Math.max(compras.stream().max(Integer::compareTo).orElse(1),
-                           ventas.stream().max(Integer::compareTo).orElse(1));
-
-        for (int i = 0; i < fechas.size(); i++) {
-            int compBar = compras.get(i) * 300 / max;
-            int ventBar = ventas.get(i) * 300 / max;
-
-            g.setColor(Color.GREEN);
-            g.fillRect(150, y, compBar, 20);
-            g.setColor(Color.BLUE);
-            g.fillRect(150, y + 25, ventBar, 20);
-
-            g.setColor(Color.BLACK);
-            g.drawString(fechas.get(i), 10, y + 15);
-            g.drawString("Compra: " + compras.get(i), 460, y + 15);
-            g.drawString("Venta: " + ventas.get(i), 460, y + 40);
-
-            y += 60;
-        }
-    }
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }

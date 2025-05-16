@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-  <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-  <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-    <group>
-      <file>file:C:/Users/USER/Documents/NetBeansProjects/gestionGanadera/src/presentacion/FrmPrinci.java</file>
-      <file>file:C:/Users/USER/Documents/NetBeansProjects/gestionGanadera/src/presentacion/FrmTransaction.java</file>
-    </group>
-  </open-files>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmLogin.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/negocio/UsuarioControl.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmPrinci.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/frmDetalleTransaccion.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmGanado.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmTransaccion.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmUsuarios.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/datos/TransaccionDAO.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmRegistrosVentas.java</file>
+            <file>file:/C:/Users/steff/OneDrive/Documentos/proyectoGan/gestionGanadera/src/presentacion/FrmGraficaVenta.java</file>
+        </group>
+    </open-files>
 </project-private>
-
