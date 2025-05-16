@@ -3,28 +3,27 @@ package entidades;
 public class Ganadero {
 
     private int id;
-    private String Nombre;
-    private String Tipo_Documento;
-    private int Num_Documento;
-    private int Telefono;
-    private String Direccion;
-    private String Email;
-    private boolean Activo;
+    private String nombre;
+    private String tipoDocumento;
+    private String numDocumento;
+    private String telefono;
+    private String direccion;
+    private String email;
+    private boolean activo;
 
-    public Ganadero(int id, String Nombre, String Tipo_Documento, int Num_Documento, int Telefono, String Direccion,
-            String Email, boolean Activo) {
+    public Ganadero() {}
+
+    public Ganadero(int id, String nombre, String tipoDocumento, String numDocumento, String telefono, String direccion, String email, boolean activo) {
         this.id = id;
-        this.Nombre = Nombre;
-        this.Tipo_Documento = Tipo_Documento;
-        this.Num_Documento = Num_Documento;
-        this.Telefono = Telefono;
-        this.Direccion = Direccion;
-        this.Email = Email;
-        this.Activo = Activo;
+        this.nombre = nombre;
+        this.tipoDocumento = tipoDocumento;
+        this.numDocumento = numDocumento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.email = email;
+        this.activo = activo;
     }
 
-    public Ganadero() {
-    }
 
     public int getId() {
         return id;
@@ -35,66 +34,61 @@ public class Ganadero {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getTipo_Documento() {
-        return Tipo_Documento;
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public void setTipo_Documento(String Tipo_Documento) {
-        this.Tipo_Documento = Tipo_Documento;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
-    public int getNum_Documento() {
-        return Num_Documento;
+    public String getNumDocumento() {
+        return numDocumento;
     }
 
-    public void setNum_Documento(int Num_Documento) {
-        this.Num_Documento = Num_Documento;
+    public void setNumDocumento(String numDocumento) {
+        this.numDocumento = numDocumento;
     }
 
-    public int getTelefono() {
-        return Telefono;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTelefono(int Telefono) {
-        this.Telefono = Telefono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isActivo() {
-        return Activo;
+        return activo;
     }
 
-    public void setActivo(boolean Activo) {
-        this.Activo = Activo;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    @Override
-    public String toString() {
-        return "Ganadero{" + "id=" + id + ", Nombre=" + Nombre + ", Tipo_Documento=" + Tipo_Documento
-                + ", Num_Documento=" + Num_Documento + ", Telefono=" + Telefono + ", Direccion=" + Direccion
-                + ", Email=" + Email + ", Activo=" + Activo + '}';
-    }
+   
 
 }

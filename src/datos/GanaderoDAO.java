@@ -4,6 +4,7 @@ import database.Conexion;
 import datos.interfaces.CrudSimpleInterface;
 import entidades.Ganadero;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,8 +32,16 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                registro.add(new Ganadero(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
-                        rs.getString(6), rs.getString(7), rs.getBoolean(8)));
+                registro.add(new Ganadero(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("tipo_documento"),
+                        rs.getString("num_documento"),
+                        rs.getString("telefono"),
+                        rs.getString("direccion"),
+                        rs.getString("email"),
+                        rs.getBoolean("activo")
+                ));
             }
 
             ps.close();
@@ -51,9 +60,16 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean insertar(Ganadero obj) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("INSERT INTO ganadero (nombre, Email, activo) VALUES (?, ?, 1)");
+            ps = con.conectar().prepareStatement(
+                "INSERT INTO ganadero (nombre, tipo_documento, num_documento, telefono, direccion, email, activo) VALUES (?, ?, ?, ?, ?, ?, ?)"
+            );
             ps.setString(1, obj.getNombre());
-            ps.setString(2, obj.getDireccion());
+            ps.setString(2, obj.getTipoDocumento());
+            ps.setString(3, obj.getNumDocumento());
+            ps.setString(4, obj.getTelefono());
+            ps.setString(5, obj.getDireccion());
+            ps.setString(6, obj.getEmail());
+            ps.setBoolean(7, obj.isActivo());
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -73,10 +89,17 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public boolean actualizar(Ganadero obj) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("UPDATE ganadero SET nombre = ?, Email = ? WHERE id = ?");
+            ps = con.conectar().prepareStatement(
+                "UPDATE ganadero SET nombre = ?, tipo_documento = ?, num_documento = ?, telefono = ?, direccion = ?, email = ?, activo = ? WHERE id = ?"
+            );
             ps.setString(1, obj.getNombre());
-            ps.setString(2, obj.getEmail());
-            ps.setInt(3, obj.getId());
+            ps.setString(2, obj.getTipoDocumento());
+            ps.setString(3, obj.getNumDocumento());
+            ps.setString(4, obj.getTelefono());
+            ps.setString(5, obj.getDireccion());
+            ps.setString(6, obj.getEmail());
+            ps.setBoolean(7, obj.isActivo());
+            ps.setInt(8, obj.getId());
 
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -94,29 +117,13 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
 
     @Override
     public boolean eliminar(int id) {
-        respuesta = false;
-        try {
-            ps = con.conectar().prepareStatement("UPDATE ganadero SET activo = 0 WHERE id = ?");
-            ps.setInt(1, id);
-
-            if (ps.executeUpdate() > 0) {
-                respuesta = true;
-            }
-
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            con.desconectar();
-        }
-        return respuesta;
+        return desactivar(id); // usa el método ya definido
     }
 
     public boolean Existe(String texto) {
         respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("SELECT nombre FROM ganadero WHERE nombre=?");
+            ps = con.conectar().prepareStatement("SELECT 1 FROM ganadero WHERE nombre = ?");
             ps.setString(1, texto);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -128,16 +135,26 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             ps = null;
+            rs = null;
             con.desconectar();
         }
         return respuesta;
     }
 
     public boolean desactivar(int id) {
+        return cambiarEstado(id, false);
+    }
+
+    public boolean activar(int id) {
+        return cambiarEstado(id, true);
+    }
+
+    private boolean cambiarEstado(int id, boolean estado) {
         boolean respuesta = false;
         try {
-            ps = con.conectar().prepareStatement("UPDATE ganadero SET activo=0 WHERE id=?");
-            ps.setInt(1, id);
+            ps = con.conectar().prepareStatement("UPDATE ganadero SET activo=? WHERE id=?");
+            ps.setBoolean(1, estado);
+            ps.setInt(2, id);
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
             }
@@ -150,25 +167,6 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         }
         return respuesta;
     }
-
-   public boolean activar(int id) {
-    boolean respuesta = false;
-    try {
-        ps = con.conectar().prepareStatement("UPDATE ganadero SET activo=1 WHERE id=?");
-        ps.setInt(1, id);
-        if (ps.executeUpdate() > 0) {
-            respuesta = true;
-        }
-        ps.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-    } finally {
-        ps = null;
-        con.desconectar();
-    }
-    return respuesta;
-}
-
 
     @Override
     public int total() {
@@ -190,5 +188,5 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         }
         return total;
     }
-
 }
+ 

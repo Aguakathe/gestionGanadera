@@ -8,13 +8,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class GanaderoControl {
 
-    private final GanaderoDAO DATOS; // OBJETOS QUYE MANEJA LAS OPERACIONES CON LAS BASES DE DATOS
-    private Ganadero obj;// OBJETO DE TIPO CATEGORIA QUE SE UTILIZA PARA MANIPULAR DATOS TEMPORALES
-    private DefaultTableModel modeloTabla;// MODELO DE TABLA UTILIZADO PARA MOSTRAR DATOS EN LA INTERFAZ GRAFICA
-    public int RegistrosMostrados;// varibable que almacena el numero de registros que se muestran en la tabla
-    private List<Ganadero> listaGanaderos;
+    private final GanaderoDAO DATOS;
+    private Ganadero obj;
+    private DefaultTableModel modeloTabla;
+    public int RegistrosMostrados;
 
-    // constructor de la ganadero control
     public GanaderoControl() {
         this.DATOS = new GanaderoDAO();
         this.obj = new Ganadero();
@@ -22,106 +20,90 @@ public class GanaderoControl {
     }
 
     public DefaultTableModel listar(String texto) {
-    List<Ganadero> lista = new ArrayList<>();
-    lista.addAll(DATOS.listar(texto)); 
-    
-    
+        List<Ganadero> lista = new ArrayList<>();
+        lista.addAll(DATOS.listar(texto));
 
+        String[] titulos = {"ID", "Nombre", "Tipo Documento", "N° Documento", "Teléfono", "Dirección", "Email", "Estado"};
+        this.modeloTabla = new DefaultTableModel(null, titulos);
 
-     
-    String[] titulos = { "GanaderoID", "Id", "Tipo Documento", "N° Documento", "Teléfono", "Dirección", "Email", "Estado" };
+        String[] registro = new String[8];
+        this.RegistrosMostrados = 0;
 
+        for (Ganadero item : lista) {
+            String estado = item.isActivo() ? "Activo" : "Inactivo";
 
-    
-    this.modeloTabla = new DefaultTableModel(null, titulos);
+            registro[0] = Integer.toString(item.getId());
+            registro[1] = item.getNombre();
+            registro[2] = item.getTipoDocumento();
+            registro[3] = item.getNumDocumento();
+            registro[4] = item.getTelefono();
+            registro[5] = item.getDireccion();
+            registro[6] = item.getEmail();
+            registro[7] = estado;
 
-    
-    String[] registro = new String[7];
+            this.modeloTabla.addRow(registro);
+            this.RegistrosMostrados++;
+        }
 
-    
-    this.RegistrosMostrados = 0;
-
-    
-    for (Ganadero item : lista) {
-       
-        String estado = item.isActivo() ? "Activo" : "Inactivo";
-
-        registro[0] = Integer.toString(item.getId());
-        registro[1] = item.getTipo_Documento();
-        registro[2] = Integer.toString(item.getNum_Documento());
-        registro[3] = Integer.toString(item.getTelefono());
-        registro[4] = item.getDireccion();
-        registro[5] = item.getEmail();
-        registro[6] = estado;
-
-        
-        this.modeloTabla.addRow(registro);
-        this.RegistrosMostrados++;
+        return this.modeloTabla;
     }
 
-    return this.modeloTabla;
-}
-
-
-    public String Insertar(String nombre, String direccion, String tipodocumento, int NumeroDocumento, int telefono,
-            String email) {
+    public String Insertar(String nombre, String tipoDocumento, String numDocumento, String telefono, String direccion, String email) {
         if (DATOS.Existe(nombre)) {
-            return "El registro ya existe ";
+            return "El registro ya existe";
         } else {
             obj.setNombre(nombre);
-            obj.setDireccion(direccion);
-            obj.setTipo_Documento(tipodocumento);
-            obj.setNum_Documento(NumeroDocumento);
+            obj.setTipoDocumento(tipoDocumento);
+            obj.setNumDocumento(numDocumento);
             obj.setTelefono(telefono);
+            obj.setDireccion(direccion);
             obj.setEmail(email);
+            obj.setActivo(true);
 
             if (DATOS.insertar(obj)) {
-                return "Ok";
+                return "OK";
             } else {
                 return "Error en el registro";
             }
         }
     }
 
-    public String Actualizar(int id, String nombre, String direccion, String nombreAnt, String tipodocumento,
-            int numrtodocumento, int telefono, String email) {
+    public String Actualizar(int id, String nombre, String nombreAnt, String tipoDocumento, String numDocumento, String telefono, String direccion, String email) {
         if (nombre.equals(nombreAnt)) {
             obj.setId(id);
             obj.setNombre(nombre);
-            obj.setDireccion(direccion);
-            obj.setTipo_Documento(tipodocumento);
-            obj.setNum_Documento(numrtodocumento);
+            obj.setTipoDocumento(tipoDocumento);
+            obj.setNumDocumento(numDocumento);
             obj.setTelefono(telefono);
+            obj.setDireccion(direccion);
             obj.setEmail(email);
 
             if (DATOS.actualizar(obj)) {
-                return "Ok";
+                return "OK";
             } else {
-                return "Error en la  actualizacion";
+                return "Error en la actualización";
             }
-        } else {// Si se cambuio el nombre se verifica que no exista otro registro con ese
-                // nombre
+        } else {
             if (DATOS.Existe(nombre)) {
-                return "El registro ya exite";
-
+                return "El registro ya existe";
             } else {
+                obj.setId(id);
                 obj.setNombre(nombre);
-                obj.setDireccion(direccion);
-                obj.setTipo_Documento(tipodocumento);
-                obj.setNum_Documento(numrtodocumento);
+                obj.setTipoDocumento(tipoDocumento);
+                obj.setNumDocumento(numDocumento);
                 obj.setTelefono(telefono);
+                obj.setDireccion(direccion);
                 obj.setEmail(email);
+
                 if (DATOS.actualizar(obj)) {
-                    return "Ok";
+                    return "OK";
                 } else {
-                    return "Error en la  actualizacion";
+                    return "Error en la actualización";
                 }
             }
-
         }
     }
 
-    // Metodo desactivar
     public String Desactivar(int id) {
         if (DATOS.desactivar(id)) {
             return "OK";
@@ -130,23 +112,21 @@ public class GanaderoControl {
         }
     }
 
-    // METODO PARA ACTIVAR UNA CATEGORIA
     public String Activar(int id) {
         if (DATOS.activar(id)) {
             return "OK";
-
         } else {
             return "No se puede activar el registro";
         }
     }
 
-    // metodo para obtener el total de categoria registarads en la base de datos
     public int total() {
         return DATOS.total();
     }
 
-    // metodo para obtener el numero de categoria actuales
     public int totalMostrados() {
         return this.RegistrosMostrados;
     }
 }
+
+ 

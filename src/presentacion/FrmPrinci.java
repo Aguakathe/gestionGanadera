@@ -219,7 +219,7 @@ public class FrmPrinci extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
-        FrmGanadero frm = new FrmGanadero();
+        FrmGanaderos frm = new FrmGanaderos();
         Escritorio.add(frm);
         frm.setVisible(true);
     }//GEN-LAST:event_saveMenuItemActionPerformed
