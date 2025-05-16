@@ -1,32 +1,25 @@
 package entidades;
 
 public class DetalleTransaccion {
+
     private int id;
-    private int id_transaccion;
-    private int id_ganado;
-    private double precio_Unitario;
+    private int idTransaccion;
+    private int idGanado;
+    private double precioUnitario;
     private int cantidad;
-   
-    
 
-    public DetalleTransaccion(int id, int id_transaccion, int id_ganado, double precio_Unitario, int cantidad) {
+    public DetalleTransaccion() {
+    }
+
+    public DetalleTransaccion(int id, int idTransaccion, int idGanado, double precioUnitario, int cantidad) {
         this.id = id;
-        this.id_transaccion = id_transaccion;
-        this.id_ganado = id_ganado;
-        this.precio_Unitario = precio_Unitario;
+        this.idTransaccion = idTransaccion;
+        this.idGanado = idGanado;
+        this.precioUnitario = precioUnitario;
         this.cantidad = cantidad;
-       
-    }
-    public DetalleTransaccion(){
-        
     }
 
-    
-
-
-    
-    
-
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -35,28 +28,28 @@ public class DetalleTransaccion {
         this.id = id;
     }
 
-    public int getId_transaccion() {
-        return id_transaccion;
+    public int getIdTransaccion() {
+        return idTransaccion;
     }
 
-    public void setId_transaccion(int id_transaccion) {
-        this.id_transaccion = id_transaccion;
+    public void setIdTransaccion(int idTransaccion) {
+        this.idTransaccion = idTransaccion;
     }
 
-    public int getId_ganado() {
-        return id_ganado;
+    public int getIdGanado() {
+        return idGanado;
     }
 
-    public void setId_ganado(int id_ganado) {
-        this.id_ganado = id_ganado;
+    public void setIdGanado(int idGanado) {
+        this.idGanado = idGanado;
     }
 
-    public double getPrecio_Unitario() {
-        return precio_Unitario;
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPrecio_Unitario(double precio_Unitario) {
-        this.precio_Unitario = precio_Unitario;
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public int getCantidad() {
@@ -67,3 +60,4 @@ public class DetalleTransaccion {
         this.cantidad = cantidad;
     }
 }
+ 
