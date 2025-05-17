@@ -27,7 +27,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
     public List<Ganadero> listar(String texto) {
         List<Ganadero> registro = new ArrayList<>();
         try {
-            ps = con.conectar().prepareStatement("SELECT * FROM ganadero WHERE nombre LIKE ?");
+            ps = con.conectar().prepareStatement("SELECT * FROM ganadero WHERE id LIKE ?");
             ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
 
@@ -61,7 +61,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         respuesta = false;
         try {
             ps = con.conectar().prepareStatement(
-                "INSERT INTO ganadero (nombre, tipo_documento, num_documento, telefono, direccion, email, activo) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO ganadero (nombre, tipo_documento, num_documento, telefono, direccion, email, activo) VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getTipoDocumento());
@@ -90,7 +90,7 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         respuesta = false;
         try {
             ps = con.conectar().prepareStatement(
-                "UPDATE ganadero SET nombre = ?, tipo_documento = ?, num_documento = ?, telefono = ?, direccion = ?, email = ?, activo = ? WHERE id = ?"
+                    "UPDATE ganadero SET nombre = ?, tipo_documento = ?, num_documento = ?, telefono = ?, direccion = ?, email = ?, activo = ? WHERE id = ?"
             );
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getTipoDocumento());
@@ -188,5 +188,5 @@ public class GanaderoDAO implements CrudSimpleInterface<Ganadero> {
         }
         return total;
     }
+
 }
- 

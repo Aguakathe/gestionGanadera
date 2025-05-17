@@ -301,10 +301,11 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        limpiar();
         tabGeneral.setEnabledAt(1, true);
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setSelectedIndex(1);
-        this.accion = "guardar";
+        this.accion = "Guardar";  
         btnGuardar.setText("Guardar");
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -317,78 +318,63 @@ public class FrmGanado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtGanaderoid.getText().length() == 0 || txtid.getText().length() > 20) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar un id de ganadero, es obligatorio", "Sistema", JOptionPane.WARNING_MESSAGE);
+       if (txtGanaderoid.getText().trim().isEmpty()) {
+            mensajeError("Debes ingresar un ID de ganadero.");
             txtGanaderoid.requestFocus();
             return;
         }
-        try {
-            // Conversión de datos
-            int ganaderoId = Integer.parseInt(txtGanaderoid.getText());
-            String numeroIdentificacion = txtNumIdentificacion.getText();
-            String raza = txtRaza.getText();
-            int edad = Integer.parseInt(txtEdad.getText());
-            double peso = Double.parseDouble(txtPeso.getText());
-            boolean vacunado = Boolean.parseBoolean(txtVacunado.getText());
-            String fechaRegistro = txtFechaRegistro.getText();
 
-            // Validar campo vacunado
-            if (!txtVacunado.getText().equals("true") && !txtVacunado.getText().equals("false")) {
-                JOptionPane.showMessageDialog(this, "El campo de vacunado debe ser true o false", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            int ganaderoId = Integer.parseInt(txtGanaderoid.getText().trim());
+            String numeroIdentificacion = txtNumIdentificacion.getText().trim();
+            String raza = txtRaza.getText().trim();
+            int edad = Integer.parseInt(txtEdad.getText().trim());
+            double peso = Double.parseDouble(txtPeso.getText().trim());
+            String vacunadoTexto = txtVacunado.getText().trim();
+            String fechaRegistro = txtFechaRegistro.getText().trim();
+
+            if (!vacunadoTexto.equals("true") && !vacunadoTexto.equals("false")) {
+                mensajeError("El campo 'Vacunado' debe ser 'true' o 'false'.");
                 return;
             }
 
+            // Validación formato fecha YYYY-MM-DD o YYYY-MM-DD HH:mm:ss
+            if (!fechaRegistro.matches("\\d{4}-\\d{2}-\\d{2}( \\d{2}:\\d{2}:\\d{2})?")) {
+                mensajeError("La fecha debe tener el formato yyyy-MM-dd o yyyy-MM-dd HH:mm:ss");
+                return;
+            }
+
+            boolean vacunado = Boolean.parseBoolean(vacunadoTexto);
+
             String resp;
-            if (this.accion.equals("Editar")) {
-                // Actualizar
-                resp = this.CONTROL.actualizar(
-                        Integer.parseInt(txtid.getText()),
-                        ganaderoId,
-                        numeroIdentificacion,
-                        raza,
-                        edad,
-                        peso,
-                        vacunado,
-                        this.ganadero_id_ant
-                );
-
-                if (resp.equals("OK")) {
-                    this.mensajeOK("Actualizado correctamente");
-                    this.limpiar();
-                    this.listar("");
-                    tabGeneral.setSelectedIndex(0);
-                    tabGeneral.setEnabledAt(0, true);
-                    tabGeneral.setEnabledAt(1, false);
-                } else {
-                    this.mensajeError(resp);
-                }
+            if ("editar".equalsIgnoreCase(this.accion)) {
+                int id = Integer.parseInt(txtid.getText().trim());
+                resp = CONTROL.actualizar(id, ganaderoId, numeroIdentificacion, raza, edad, peso, vacunado, fechaRegistro);
             } else {
-                // Insertar nuevo, mirar esto?
-                resp = this.CONTROL.insertar(ganaderoId, numeroIdentificacion, raza, edad, peso, vacunado, fechaRegistro);
+                resp = CONTROL.insertar(ganaderoId, numeroIdentificacion, raza, edad, peso, vacunado, fechaRegistro);
+            }
 
-                if (resp.equals("OK")) {
-                    this.mensajeOK("Registrado correctamente");
-                    this.limpiar();
-                    this.listar("");
-                    tabGeneral.setSelectedIndex(0);
-                    tabGeneral.setEnabledAt(0, true);
-                    tabGeneral.setEnabledAt(1, false);
-                } else {
-                    this.mensajeError(resp);
-                }
+            if (resp.equals("OK")) {
+                mensajeOK(this.accion.equalsIgnoreCase("editar") ? "Registro actualizado correctamente" : "Registro guardado correctamente");
+                limpiar();
+                listar("");
+                tabGeneral.setSelectedIndex(0);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setEnabledAt(1, false);
+            } else {
+                mensajeError(resp);
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa valores numéricos válidos en los campos Edad y Peso.", "Error", JOptionPane.ERROR_MESSAGE);
+            mensajeError("Por favor ingresa valores numéricos válidos en Edad y Peso.");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        if (tablaListarGanado.getSelectedRowCount() == 1) {
+         if (tablaListarGanado.getSelectedRowCount() == 1) {
             String id = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 0));
             String ganaderoId = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 1));
-            this.ganadero_id_ant = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 1));
+            this.ganadero_id_ant = ganaderoId;
             String numeroIdentificacion = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 2));
             String raza = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 3));
             String edad = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 4));
@@ -396,38 +382,29 @@ public class FrmGanado extends javax.swing.JInternalFrame {
             String vacunado = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 6));
             String fechaRegistro = String.valueOf(tablaListarGanado.getValueAt(tablaListarGanado.getSelectedRow(), 7));
 
-            txtid.setText(id); //tenemos un numId y un txtid? por qué?
+            txtid.setText(id);
             txtGanaderoid.setText(ganaderoId);
             txtNumIdentificacion.setText(numeroIdentificacion);
             txtRaza.setText(raza);
             txtEdad.setText(edad);
             txtPeso.setText(peso);
             txtVacunado.setText(vacunado);
-
             txtFechaRegistro.setText(fechaRegistro);
+
+            this.accion = "editar";
+            btnGuardar.setText("Editar");
 
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
-            this.accion = "editar";
-
-            btnGuardar.setText("editar");
-
         } else {
-            this.mensajeError("Seleccione un registro a editar");
+            mensajeError("Seleccione un registro a editar");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String texto = txtBuscar.getText().trim();
-
-        if (texto.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre para buscar", "Sistema", JOptionPane.WARNING_MESSAGE);
-            txtBuscar.requestFocus();
-            return;
-        }
-
-        this.listar(texto);
+         String texto = txtBuscar.getText().trim();
+        listar(texto.isEmpty() ? "" : texto);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

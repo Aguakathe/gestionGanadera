@@ -56,8 +56,8 @@ public class DetalleTransaccionControl {
     }
 
     public String actualizar(int id, int idTransaccion, int idGanado, double precioUnitario, int cantidad) {
-        if (DATOS.existe(idTransaccion, idGanado) && !DATOS.esElMismoRegistro(id, idTransaccion, idGanado)) {
-            return "Ya existe otro registro con esta combinación";
+        if (DATOS.existe(idTransaccion, idGanado)) {
+            return "Ya existe este registro";
         }
 
         obj.setId(id);

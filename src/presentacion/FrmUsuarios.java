@@ -75,7 +75,6 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
         btnDesactivar = new javax.swing.JButton();
         ibTotalRegistros = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -93,6 +92,10 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setTitle("Usuarios");
+
+        tabGeneral.setBackground(new java.awt.Color(242, 234, 172));
+
+        jPanel1.setBackground(new java.awt.Color(242, 234, 202));
 
         jLabel1.setText("Nombre");
 
@@ -191,7 +194,7 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
 
         tabGeneral.addTab("Lista ", jPanel1);
 
-        jLabel2.setText("ID");
+        jPanel2.setBackground(new java.awt.Color(242, 217, 238));
 
         jLabel3.setText("Rol_Id");
 
@@ -239,7 +242,6 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel6))
                         .addGap(38, 38, 38)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,9 +260,7 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -489,7 +489,6 @@ public class FrmUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel ibTotalRegistros;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

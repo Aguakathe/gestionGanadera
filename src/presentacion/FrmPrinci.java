@@ -36,8 +36,8 @@ public class FrmPrinci extends javax.swing.JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.setColor(Color.white);
-                g.fillRect(0, 0, getWidth(), getHeight());
+                java.awt.Image img = new javax.swing.ImageIcon(getClass().getResource("/presentacion/iconos/fondo.png")).getImage();
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
             }
         };
         menuBar = new javax.swing.JMenuBar();
@@ -55,6 +55,9 @@ public class FrmPrinci extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Escritorio.setBackground(java.awt.SystemColor.activeCaption);
+        Escritorio.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(4, 3, 3), null));
 
         menuGanaderia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/iconos/cow.png"))); // NOI18N
         menuGanaderia.setMnemonic('f');

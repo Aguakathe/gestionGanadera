@@ -76,6 +76,10 @@ public class FrmRoles extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Roles");
 
+        tabGeneral.setBackground(new java.awt.Color(205, 220, 213));
+
+        jPanel1.setBackground(new java.awt.Color(242, 220, 186));
+
         jLabel2.setText("Nombre");
 
         btnBuscar.setText("Buscar");
@@ -152,6 +156,8 @@ public class FrmRoles extends javax.swing.JInternalFrame {
         );
 
         tabGeneral.addTab("Listar", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(242, 195, 185));
 
         jLabel1.setText("Nombre (*)");
 

@@ -26,8 +26,13 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
     public List<DetalleTransaccion> listar(String texto) {
         List<DetalleTransaccion> registro = new ArrayList<>();
         try {
-            ps = con.conectar().prepareStatement("SELECT * FROM detalle_transaccion WHERE transaccion_id = ?");
-            ps.setInt(1, Integer.parseInt(texto));
+            if (texto == null || texto.trim().isEmpty()) {
+                ps = con.conectar().prepareStatement("SELECT * FROM detalle_transaccion");
+            } else {
+                ps = con.conectar().prepareStatement("SELECT * FROM detalle_transaccion WHERE transaccion_id = ?");
+                ps.setInt(1, Integer.parseInt(texto.trim()));
+            }
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -52,16 +57,19 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         return registro;
     }
 
-    public boolean existe(int transaccionId, int ganadoId) {
+    public boolean existe(int idTransaccion, int idGanado) {
         boolean existe = false;
         try {
-            ps = con.conectar().prepareStatement("SELECT 1 FROM detalle_transaccion WHERE transaccion_id = ? AND ganado_id = ?");
-            ps.setInt(1, transaccionId);
-            ps.setInt(2, ganadoId);
+            String query = "SELECT 1 FROM detalle_transaccion WHERE transaccion_id = ? AND ganado_id = ?";
+            ps = con.conectar().prepareStatement(query);
+            ps.setInt(1, idTransaccion);
+            ps.setInt(2, idGanado);
             rs = ps.executeQuery();
+
             if (rs.next()) {
                 existe = true;
             }
+
             ps.close();
             rs.close();
         } catch (SQLException e) {
@@ -74,35 +82,12 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         return existe;
     }
 
-    public boolean esElMismoRegistro(int id, int transaccionId, int ganadoId) {
-        boolean esElMismo = false;
-        try {
-            ps = con.conectar().prepareStatement("SELECT 1 FROM detalle_transaccion WHERE id = ? AND transaccion_id = ? AND ganado_id = ?");
-            ps.setInt(1, id);
-            ps.setInt(2, transaccionId);
-            ps.setInt(3, ganadoId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                esElMismo = true;
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            rs = null;
-            con.desconectar();
-        }
-        return esElMismo;
-    }
-
     @Override
     public boolean insertar(DetalleTransaccion obj) {
         respuesta = false;
         try {
             ps = con.conectar().prepareStatement(
-                "INSERT INTO detalle_transaccion (transaccion_id, ganado_id, precio_unitario, cantidad) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO detalle_transaccion (transaccion_id, ganado_id, precio_unitario, cantidad) VALUES (?, ?, ?, ?)");
             ps.setInt(1, obj.getIdTransaccion());
             ps.setInt(2, obj.getIdGanado());
             ps.setDouble(3, obj.getPrecioUnitario());
@@ -127,7 +112,7 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         respuesta = false;
         try {
             ps = con.conectar().prepareStatement(
-                "UPDATE detalle_transaccion SET transaccion_id = ?, ganado_id = ?, precio_unitario = ?, cantidad = ? WHERE id = ?");
+                    "UPDATE detalle_transaccion SET transaccion_id = ?, ganado_id = ?, precio_unitario = ?, cantidad = ? WHERE id = ?");
             ps.setInt(1, obj.getIdTransaccion());
             ps.setInt(2, obj.getIdGanado());
             ps.setDouble(3, obj.getPrecioUnitario());
@@ -178,6 +163,7 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
             if (rs.next()) {
                 total = rs.getInt(1);
             }
+
             ps.close();
             rs.close();
         } catch (SQLException e) {
@@ -190,4 +176,3 @@ public class DetalletransaccionDAO implements CrudSimpleInterface<DetalleTransac
         return total;
     }
 }
- 

@@ -127,6 +127,6 @@ public class GanaderoControl {
     public int totalMostrados() {
         return this.RegistrosMostrados;
     }
-}
 
- 
+    
+}

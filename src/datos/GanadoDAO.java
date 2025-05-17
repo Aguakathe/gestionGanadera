@@ -26,7 +26,7 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
         List<Ganado> registro = new ArrayList<>();
         try {
             ps = CON.conectar().prepareStatement("SELECT * FROM ganado WHERE numero_identificacion LIKE ?");
-            ps.setString(1, "&" + texto + "&");
+            ps.setString(1, "%" + texto + "%");  // ← CORREGIDO
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -38,8 +38,10 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
                         rs.getInt("edad"),
                         rs.getDouble("peso"),
                         rs.getBoolean("vacunado"),
-                        rs.getString("fecha_registro")));
+                        rs.getString("fecha_registro")
+                ));
             }
+
             ps.close();
             rs.close();
         } catch (SQLException e) {
@@ -98,6 +100,7 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             CON.desconectar();
+            ps = null;
         }
         return respuesta;
     }
@@ -141,7 +144,7 @@ public class GanadoDAO implements CrudSimpleInterface<Ganado> {
         }
         return totalRegistro;
     }
-  
+
     public boolean existe(String numeroIdentificacion, int id) {
         respuesta = false; // Inicializamos la variable respuesta como falsa
 

@@ -56,7 +56,7 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -85,12 +85,16 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Ganaderos");
 
+        tabGeneral.setBackground(new java.awt.Color(196, 146, 146));
+
+        jPanel1.setBackground(new java.awt.Color(220, 205, 205));
+
         jLabel1.setText("Id");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -152,7 +156,7 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
-                        .addComponent(jButton1)
+                        .addComponent(btnBuscar)
                         .addGap(37, 37, 37)
                         .addComponent(btnNuevo)
                         .addGap(35, 35, 35)
@@ -167,7 +171,7 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscar)
                     .addComponent(btnEditar)
                     .addComponent(btnNuevo))
                 .addGap(18, 18, 18)
@@ -181,6 +185,8 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
         );
 
         tabGeneral.addTab("Listar Ganaderos", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(136, 93, 93));
 
         jLabel2.setText("Nombre (*)");
 
@@ -466,7 +472,7 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
         if (tablaListarGanadero.getSelectedRowCount() == 1) {
-             String id = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 0));
+            String id = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 0));
             String nombre = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 1));
             String tipoDocumento = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 2));
             String numeroDocumento = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 3));
@@ -496,8 +502,8 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnActivarActionPerformed
 
     private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
-         if (tablaListarGanadero.getSelectedRowCount() == 1) {
-             String id = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 0));
+        if (tablaListarGanadero.getSelectedRowCount() == 1) {
+            String id = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 0));
             String nombre = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 1));
             String tipoDocumento = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 2));
             String numeroDocumento = String.valueOf(tablaListarGanadero.getValueAt(tablaListarGanadero.getSelectedRow(), 3));
@@ -520,20 +526,28 @@ public class FrmGanaderos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnDesactivarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /* Falta metodo buscar*/
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String texto = txtBuscar.getText().trim();
+
+        if (texto.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre o ID para buscar", "Sistema", JOptionPane.WARNING_MESSAGE);
+            txtBuscar.requestFocus();
+            return;
+        }
+
+        this.listar(texto);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDesactivar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel ibTotalRegistros;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
